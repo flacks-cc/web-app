@@ -1,0 +1,40 @@
+<div id="main-container">
+   
+    <section id="login" class="login-section">
+        <div class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Inicio de sesión</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="dashboard.html" method="post" autocomplete="off">
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" id="email" class="form-control" name="email"
+                                placeholder="Ingresa tu correo electrónico" class="campo" required>
+                                <p>Ingresa un correo electrónico</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" class="form-control" name="email"
+                                placeholder="Ingresa tu contraseña" class="campo" required>
+                                <p>Ingresa una contraseña de mínimo 8 caracteres</p>
+                        </div>
+                        <input type="submit" name="login" value="Iniciar sesión" class="btn-primary" routerLink="/dashboard-usuarios">
+                        <label for="forgot" id="forgot"><a>¿No tienes una cuenta?</a></label>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <footer class="footer">
+                        <div class="grupo2">
+                            <small>&copy; 2023 <b>Flack's Barber Shop</b> - Todos los derechos reservados</small>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</div>

@@ -1,0 +1,62 @@
+<div class="modal-overlay">
+
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formReservacion" (ngSubmit)="agregarOEditar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombreServicio">* Nombre del servicio:</label>
+                    <input type="text" class="form-control" id="nombreServicio" maxlength="50" formControlName="nombreServicio" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formReservacion.get('nombreServicio')?.invalid && (formReservacion.get('nombreServicio')?.dirty || formReservacion.get('nombreServicio')?.touched)">
+                        <div *ngIf="formReservacion.get('nombreServicio')?.hasError('required')"><p>El nombre del servicio es obligatorio.</p></div>
+                    </div>
+                </div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="fechaReservacion">* Fecha de la reservación:</label>
+                            <input type="date" class="form-control" id="fechaReservacion" pattern="^(?:\d{4})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$" formControlName="fechaReservacion" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formReservacion.get('fechaReservacion')?.invalid && (formReservacion.get('fechaReservacion')?.dirty || formReservacion.get('fechaReservacion')?.touched)">
+                                <div *ngIf="formReservacion.get('fechaReservacion')?.hasError('required')"><p>La fecha de la reservación es obligatoria.</p></div>
+                                <div *ngIf="formReservacion.get('fechaReservacion')?.hasError('pattern')"><p>Utiliza el formato adecuado para la fecha.</p></div>
+                                <div *ngIf="formReservacion.get('fechaReservacion')?.hasError('fechaPasada')"><p>No puedes reservar en una fecha anterior a la actual.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="horaReservacion">* Hora de la reservación:</label>
+                            <input type="time" class="form-control" id="horaReservacion" pattern="^(?:[01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$" formControlName="horaReservacion" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formReservacion.get('horaReservacion')?.invalid && (formReservacion.get('horaReservacion')?.dirty || formReservacion.get('horaReservacion')?.touched)">
+                                <div *ngIf="formReservacion.get('horaReservacion')?.hasError('required')"><p>La hora de la reservación es obligatoria.</p></div>
+                                <div *ngIf="formReservacion.get('horaReservacion')?.hasError('pattern')"><p>Utiliza el formato adecuado para la hora.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nombreUsuario">* Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" maxlength="20" formControlName="nombreUsuario" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formReservacion.get('nombreUsuario')?.invalid && (formReservacion.get('nombreUsuario')?.dirty || formReservacion.get('nombreUsuario')?.touched)">
+                        <div *ngIf="formReservacion.get('nombreUsuario')?.hasError('required')"><p>El nombre de usuario es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="text" class="btn-cancelar" routerLink="/dashboard-reservaciones">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formReservacion.invalid && submitted">
+                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

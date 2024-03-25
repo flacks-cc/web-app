@@ -1,0 +1,62 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formProducto" (ngSubmit)="agregarOEditar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombreProducto">* Nombre del producto:</label>
+                    <input type="text" class="form-control" id="nombreProducto" maxlength="50" formControlName="nombreProducto" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formProducto.get('nombreProducto')?.invalid && (formProducto.get('nombreProducto')?.dirty || formProducto.get('nombreProducto')?.touched)">
+                        <div *ngIf="formProducto.get('nombreProducto')?.hasError('required')"><p>El nombre del producto es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">* Descripción:</label>
+                    <textarea class="form-control no-resize" id="descripcion" maxlength="100" formControlName="descripcion" required></textarea>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formProducto.get('descripcion')?.invalid && (formProducto.get('descripcion')?.dirty || formProducto.get('descripcion')?.touched)">
+                        <div *ngIf="formProducto.get('descripcion')?.hasError('required')"><p>La descripción del producto es obligatoria.</p></div>
+                    </div>
+                </div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="precio">* Precio (MXN):</label>
+                            <input type="number" class="form-control" id="precio" min="1" step="1" pattern="[0-9]+" inputmode="numeric" formControlName="precio" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formProducto.get('precio')?.invalid && (formProducto.get('precio')?.dirty || formProducto.get('precio')?.touched)">
+                                <div *ngIf="formProducto.get('precio')?.hasError('required')"><p>El precio del producto es obligatorio.</p></div>
+                                <div *ngIf="formProducto.get('precio')?.hasError('noNegativos')"><p>El precio no puede ser negativo.</p></div>
+                                <div *ngIf="formProducto.get('precio')?.hasError('noDecimales')"><p>El precio no puede ser decimal.</p></div>
+                                <div *ngIf="formProducto.get('precio')?.hasError('noCero')"><p>El precio no puede ser cero.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="stock">* Stock (unidades):</label>
+                            <input type="number" class="form-control" id="stock" min="0" step="1" pattern="[0-9]+" formControlName="stock" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formProducto.get('stock')?.invalid && (formProducto.get('stock')?.dirty || formProducto.get('stock')?.touched)">
+                                <div *ngIf="formProducto.get('stock')?.hasError('required')"><p>El stock del producto es obligatorio.</p></div>
+                                <div *ngIf="formProducto.get('stock')?.hasError('noNegativos')"><p>El stock no puede ser negativo.</p></div>
+                                <div *ngIf="formProducto.get('stock')?.hasError('noDecimales')"><p>El stock no puede ser decimal.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="text" class="btn-cancelar" routerLink="/dashboard-productos">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formProducto.invalid && submitted">
+                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

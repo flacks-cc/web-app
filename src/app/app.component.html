@@ -1,0 +1,10 @@
+<!--Condicional que oculta la barra de navegación en las secciones que indica
+la función que se encuentra en app.component.ts -->
+<app-menu *ngIf="!HideNavFooter()"></app-menu>
+
+<!-- Todo el contenido de las paginas -->
+<router-outlet></router-outlet>
+
+<!-- Condicional que oculta el pie de página en las secciones que indica
+la función que se encuentra en app.component.ts -->
+<app-footer *ngIf="!HideNavFooter()"></app-footer>

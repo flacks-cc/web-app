@@ -1,0 +1,340 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    transition: all 0.5s ease;
+}
+
+/* Titulos */
+#titulo {
+    text-transform: uppercase;
+    align-content: center;
+    background-color: rgb(10, 10, 10);
+    color: #ffff;
+    font-size: 24px;
+    font-weight: bolder;
+    text-align: center;
+    padding: 40px 100px;
+}
+
+/* -------------------------------------------- */
+/* Panel administrativo / Dashboard */
+.main-container {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 250px);
+    left: 250px;
+    transition: all 0.5s ease;
+}
+
+.container-dash {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px;
+    flex-grow: 1;
+}
+
+.title-container {
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f0f0f;
+}
+
+.title-container button {
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: #1b9445;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    margin-top: 0;
+}
+
+.title-container button:hover {
+    background-color: #147937;
+}
+
+.title-container h2 {
+    margin: 0;
+}
+
+.title-container button {
+    height: 100%;
+    padding: 10px 20px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+table th,
+table td {
+    padding: 12.5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table td {
+    font-weight: normal;
+}
+
+table th {
+    background-color: #f0f0f0;
+}
+
+table td:last-child i {
+    margin: 10px;
+}
+
+table td:last-child i.fa-edit {
+    color: rgb(53, 112, 223);
+}
+
+table td:last-child i.fa-trash-alt {
+    color: rgb(245, 33, 33);
+}
+
+i {
+    cursor: pointer;
+}
+
+i:hover {
+    opacity: 0.7;
+    transform: 2.0s;
+}
+
+/* Hace más pequeño el contenido de la pagina para adaptarse a la sidebar */
+.main-container.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+/* -------------------------------------------- */
+/* Estilos para el modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.eliminar {
+    background-color: #7f7f7f;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 2.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+}
+
+.modal-header {
+    padding: 20px;
+    background-color: #0f0f0f;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 24px;
+}
+
+.modal-close {
+    font-size: 24px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    background-color: #fff;
+}
+/* Estilo para los mensajes en los CRUD*/
+.modal-body p {
+    color: rgb(212, 36, 36);
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.msj-eliminar {
+    padding: 15px 10px;
+}
+
+.msj-eliminar p {
+    font-size: 20px;
+    font-weight: bold;
+    color:#000000;
+}
+
+/*-------------------------*/
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin: 5px 0px 5px 0px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.no-resize {
+    resize: none;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-col {
+    width: 49%;
+}
+
+.modal-footer {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-footer button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 49%;
+}
+
+.btn-cancelar {
+    background-color: #ccc;
+}
+
+.btn-cancelar:hover {
+    background-color: #b1b1b1;
+}
+
+.btn-primary {
+    background-color: #1b9445;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #147937;
+}
+
+.btn-eliminar {
+    background-color: #f52121;
+    color: #fff;
+}
+
+.btn-eliminar:hover {
+    background-color: #da1717;
+}
+
+/* Modo reponsivo del dashboard */
+@media (max-width: 768px) {
+
+    /* -------------------------------------------- */
+    .main-container.active,
+    .main-container {
+        width: calc(100% - 60px);
+        left: 60px;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .title-container {
+        flex-direction: column;
+    }
+
+    .title-container button {
+        padding: 8px 16px;
+    }
+
+    .title-container h2 {
+        margin-bottom: 10px;
+    }
+
+    table td:last-child i {
+        margin: 15px 0px;
+    }
+
+    table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        font-size: 15px;
+    }
+
+    /* -------------------------------------------- */
+    .modal {
+        max-width: 85%;
+    }
+
+    .modal-header {
+        font-size: 18px;
+    }
+
+    .modal-body {
+        padding: 15px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    .btn-cancelar,
+    .btn-primary {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .lista-desplegable {
+        width: calc(25% - 2px);
+    }
+
+    .lista-desplegable.active {
+        bottom: calc(35% - 2px);
+    }
+
+}

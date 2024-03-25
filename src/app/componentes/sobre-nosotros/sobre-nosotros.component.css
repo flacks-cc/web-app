@@ -1,0 +1,225 @@
+#sobre-nosotros {
+    height: 100vh;
+    background-color: #000000;
+    padding: 0;
+    display: flex;
+}
+
+.contenedor-sobre-nosotros {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-sobre-nosotros .texto {
+    text-align: left;
+    max-width: 500px;
+    color: #ffff;
+    margin: 20px;
+}
+
+.contenedor-sobre-nosotros h2 {
+    font-size: 48px;
+    margin: 15px;
+}
+
+.contenedor-sobre-nosotros p {
+    margin: 15px;
+    font-size: 20px;
+}
+
+.imagen {
+    flex-basis: 50%;
+    position: relative;
+}
+
+.imagen img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+#antecedentes {
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.contenedor-antecedentes {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.contenedor-antecedentes h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.info {
+    margin-bottom: 30px;
+}
+
+.info p {
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 10px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100%;
+}
+
+#mision-vision {
+    background-color: #f8f8f8;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.contenedor-mision-vision {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 15px;
+}
+
+.mision,
+.vision {
+    flex-basis: 50%;
+    padding: 25px;
+}
+
+.mision h2,
+.vision h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.mision h2 i,
+.vision h2 i {
+    margin-right: 10px;
+}
+
+.mision p,
+.vision p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+#valores {
+    background-color: #ffffff;
+    padding: 50px;
+}
+
+#valores h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contenedor-valores {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.valores h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.valor {
+    flex-basis: 33.33%;
+    margin: 20px;
+}
+
+.valor h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.valor h3 i {
+    margin-right: 10px;
+}
+
+.valor p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+
+
+@media (max-width: 768px) {
+    #sobre-nosotros {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .contenedor-sobre-nosotros {
+        flex-basis: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 25px;
+    }
+
+    .contenedor-sobre-nosotros .texto {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .contenedor-sobre-nosotros h2 {
+        font-size: 46px;
+    }
+
+    .contenedor-sobre-nosotros p {
+        font-size: 18px;
+    }
+
+    .imagen {
+        flex-basis: 100%;
+        margin-top: 50px;
+    }
+
+    .imagen img {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .contenedor-antecedentes p{
+        font-size: 18px;
+    }
+
+    .contenedor-mision-vision,
+    .contenedor-valores {
+        flex-direction: column;
+    }
+
+    .mision,
+    .vision,
+    .valor {
+        flex-basis: 100%;
+    }
+}

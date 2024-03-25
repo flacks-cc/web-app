@@ -1,0 +1,227 @@
+/* Contacto */
+#contacto {
+    width: 100%;
+    padding: 0px 100px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 50px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    background-color: #f8f8f8;
+    padding: 80px 0px;
+}
+
+#contacto form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+#contacto form .campo,
+#contacto form textarea {
+    padding: 15px 10px;
+    font-size: 15px;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+
+#contacto label {
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+#contacto form textarea {
+    width: 100%;
+    max-width: 600px;
+    min-width: 600px;
+    min-height: 150px;
+    max-height: 150px;
+}
+
+form p{
+    color: gray;
+    font-size: 14px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+#contacto .campo-email{
+    padding: 15px 10px;
+    font-size: 15px;
+    border: 1px solid #dbdbdb;
+    /* margin-bottom: 20px; */
+    border-radius: 3px;
+}
+
+#contacto form .btnEnviar {
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: goldenrod;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    margin-top: 0;
+}
+
+#contacto form .btnEnviar:hover {
+    background-color: rgb(190, 146, 33);
+}
+
+.nombre-apellido {
+    display: flex;
+    grid-gap: 10px;
+}
+
+.nombre-apellido input {
+    flex: 1;
+}
+
+/* Sección de horarios */
+#horarios {
+    width: 100%;
+    background-color: #f8f8f8;
+    margin: 20px 0px;
+}
+
+#horarios .container,
+#información .container {
+    display: flex;
+    width: 100%;
+}
+
+.horarios-container,
+.contacto-container {
+    width: 50%;
+    background-color: #fff;
+    padding: 20px;
+    display: grid;
+    place-items: center;
+}
+
+.imagen-container {
+    width: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.horarios-container h2,
+.contacto-container h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.horarios-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 20px;
+}
+
+.dia-semana {
+    text-align: center;
+}
+
+.dia-semana h3 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.dia-semana p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.contacto-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.informacion-contacto p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.informacion-contacto a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.informacion-contacto a:hover {
+    text-decoration: none;
+    color: goldenrod;
+}
+
+.informacion-contacto i {
+    margin-right: 5px;
+}
+
+#ubicacion {
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+#ubicacion .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#ubicacion h2 {
+    font-size: 24px;
+    margin: 20px 0px;
+    padding: 10px;
+}
+
+#ubicacion .mapa {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    /* Contacto */
+    #contacto {
+        padding: 75px 25px;
+    }
+
+    #contacto form textarea,
+    #contacto .btnEnviar,
+    #contacto form .campo {
+        min-width: auto;
+        max-width: auto;
+        width: 100%;
+    }
+
+    #horarios .container,
+    #contacto .container {
+        flex-direction: column;
+    }
+
+    .horarios-container,
+    .contacto-container,
+    .imagen-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .imagen-container {
+        display: flex;
+        justify-content: center;
+    }
+}

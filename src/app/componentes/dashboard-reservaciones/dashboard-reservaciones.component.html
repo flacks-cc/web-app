@@ -1,0 +1,67 @@
+<div class="main-container" id="main">
+
+    <!-- Llamamos al component menu lateral para que aparezca nuestra sidebar -->
+    <app-menu-lateral></app-menu-lateral>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-dash">
+
+                    <!-- Sección del dashboard para administrar reservaciones -->
+                    <div>
+                        <div class="title-container">
+                            <h2>Administrar reservaciones</h2>
+                            <button routerLink="/crud-reservaciones">Agregar reservacion</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th hidden>Id</th>
+                                    <th>Nombre del servicio</th>
+                                    <th>Fecha de la reservación</th>
+                                    <th>Hora de la reservación</th>
+                                    <th>Nombre de usuario</th>
+                                    <th></th> <!-- Acciones CRUD -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Filas de la tabla con los reservaciones -->
+                                <tr *ngFor="let r of reservaciones; let i = index">
+                                    <td hidden>{{ r.idReservacion }}</td>
+                                    <td>{{ r.nombreServicio }}</td>
+                                    <td>{{ r.fechaReservacion }}</td>
+                                    <td>{{ r.horaReservacion }}</td>
+                                    <td>{{ r.nombreUsuario }}</td>
+                                    <td>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-reservacion/', r.idReservacion]"></i>
+                                        <i (click)="abrirEliminarPopup(i)" class="far fa-trash-alt fa-lg text-danger"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Popup para eliminar registros -->
+                    <div class="modal-overlay eliminar" *ngIf="popupEliminarVisible">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Confirmar eliminación</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="msj-eliminar">
+                                    <p>¿Estás seguro de que deseas eliminar este registro?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn-cancelar" (click)="cerrarEliminarPopup()">Cancelar</button>
+                                    <button class="btn-eliminar" (click)="eliminar(reservaciones[indiceReservacionAEliminar])">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

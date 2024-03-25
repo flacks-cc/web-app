@@ -1,0 +1,335 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    transition: all 0.5s ease;
+}
+
+#check {
+    display: none;
+}
+
+/* Barra contenedora */
+.barra-contenedor {
+    padding: 10px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+/* Banner */
+#banner {
+    padding: 0 100px;
+    width: 100%;
+    opacity: 1;
+    visibility: inherit;
+    z-index: 1;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Parallax efecto */
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner-1 {
+    background-image: url("../../../assets/img/banner1.jpg");
+}
+
+.banner-2 {
+    background-image: url("../../../assets/img/banner2.jpg");
+}
+
+.contenido-banner {
+    position: relative;
+    color: #ffff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.contenido-banner .btn {
+    display: inline-block;
+    background-color: white;
+    color: #000000;
+    padding: 10px 20px;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: larger;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contenido-banner .btn:hover {
+    background-color: rgb(0, 0, 0);
+    color: #ffff;
+}
+
+.contenido-banner h3 {
+    font-size: 57px;
+    font-weight: 400;
+    padding: 10px 0px;
+}
+
+.contenido-banner h3 span {
+    font-weight: 700;
+}
+
+/* Servicios */
+#servicios .contenedor-servicios {
+    padding: 80px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#servicios img {
+    width: 75%;
+    transition: transform 0.3s;
+    margin-bottom: 10px;
+}
+
+#servicios img:hover {
+    transform: scale(1.05);
+}
+
+#servicios div {
+    display: grid;
+    place-items: center;
+    padding: 30px 20px;
+    flex-basis: calc(100% / 4);
+    box-sizing: border-box;
+}
+
+#servicios div h3 {
+    color: black;
+    font-size: 16px;
+    margin: 15px 0px;
+}
+
+#servicios div h4,
+#servicios div p {
+    color: black;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+#servicios div h5 {
+    font-size: 16px;
+    color: black;
+}
+
+/* Productos */
+#productos .contenedor-productos {
+    padding: 80px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#productos img {
+    width: 66%;
+    transition: transform 0.3s;
+    margin-bottom: 10px;
+}
+
+#productos img:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+#productos div {
+    display: grid;
+    place-items: center;
+    padding: 30px 20px;
+    flex-basis: calc(100% / 4);
+    box-sizing: border-box;
+}
+
+#productos div h4,
+#productos div p {
+    color: black;
+    font-size: 16px;
+    margin-bottom: 9px;
+}
+
+#productos div h5 {
+    font-size: 16px;
+    color: black;
+}
+
+#productos div h6 {
+    font-size: 18px;
+    color: brown;
+    font-weight: normal;
+}
+
+#productos .btn,
+#servicios .btn {
+    display: inline-block;
+    background-color: rgb(236, 236, 236);
+    color: #000000;
+    padding: 10px;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+    text-align: center;
+}
+
+#productos .btn:hover,
+#servicios .btn:hover {
+    transform: scale(1.05);
+    opacity: 0.7;
+}
+
+#ubicacion {
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+#ubicacion .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#ubicacion h2 {
+    font-size: 24px;
+    margin: 20px 0px;
+    padding: 10px;
+}
+
+#ubicacion .mapa {
+    width: 100%;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+    #productos div {
+        flex-basis: calc(100% / 2);
+    }
+
+    #servicios div {
+        flex-basis: calc(100% / 2);
+    }
+
+    #servicios div h4,
+    #servicios div p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Header */
+    header {
+        padding: 0 25px;
+    }
+
+    .mostrar-menu,
+    .esconder-menu {
+        display: block;
+    }
+
+    .menu {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(20, 20, 20, 0.975);
+        right: -100%;
+        top: 0;
+        text-align: center;
+        padding: 100px 0px;
+        z-index: 100;
+        transition: 0.8s;
+    }
+
+    .menu ul a {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .menu li {
+        display: block;
+        float: none;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .esconder-menu {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+    }
+
+    #check:checked~.menu {
+        right: 0;
+    }
+
+    .contenido-banner .btn {
+        width: 50%;
+    }
+
+    .contenido-banner h3 {
+        font-size: 35px;
+    }
+
+    /* Productos */
+    #productos {
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 50px;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    #productos img {
+        width: 75%;
+    }
+
+    #productos div {
+        flex-basis: 100%;
+    }
+
+    /* Servicios */
+    #servicios {
+        position: relative;
+        width: auto;
+        height: auto;
+        padding: 50px;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    #servicios img {
+        width: 75%;
+    }
+
+    #servicios div {
+        flex-basis: 100%;
+    }
+}

@@ -1,0 +1,64 @@
+<div class="modal-overlay">
+
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formUsuario" (ngSubmit)="agregarOEditar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombreUsuario">* Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" maxlength="20" formControlName="nombreUsuario" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formUsuario.get('nombreUsuario')?.invalid && (formUsuario.get('nombreUsuario')?.dirty || formUsuario.get('nombreUsuario')?.touched)">
+                        <div *ngIf="formUsuario.get('nombreUsuario')?.hasError('required')"><p>El nombre de usuario es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">* Número de teléfono:</label>
+                    <input type="text" class="form-control" id="telefono" pattern="[0-9]+" inputmode="numeric" minlength="10" maxlength="10" formControlName="telefono" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formUsuario.get('telefono')?.invalid && (formUsuario.get('telefono')?.dirty || formUsuario.get('telefono')?.touched)">
+                        <div *ngIf="formUsuario.get('telefono')?.hasError('required')"><p>El número teléfono del usuario es obligatorio.</p></div>
+                        <div *ngIf="formUsuario.get('telefono')?.hasError('pattern')"><p>El número de teléfono solo puede contener números.</p></div>
+                        <div *ngIf="formUsuario.get('telefono')?.hasError('minlength')"><p>El número de teléfono debe contener 10 caracteres</p></div>
+                    </div>
+                </div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="correo">* Correo electrónico:</label>
+                            <input type="email" class="form-control" id="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" formControlName="correo" placeholder="example@gmail.com" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formUsuario.get('correo')?.invalid && (formUsuario.get('correo')?.dirty || formUsuario.get('correo')?.touched)">
+                                <div *ngIf="formUsuario.get('correo')?.hasError('required')"><p>El correo del usuario es obligatorio.</p></div>
+                                <div *ngIf="formUsuario.get('correo')?.hasError('pattern')"><p>Use un formato adecuado para el correo.</p></div>
+                                <div *ngIf="uniqueError"><p>{{ uniqueError }}</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="contrasena">* Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasena" minlength="8" formControlName="contrasena" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formUsuario.get('contrasena')?.invalid && (formUsuario.get('contrasena')?.dirty || formUsuario.get('contrasena')?.touched)">
+                                <div *ngIf="formUsuario.get('contrasena')?.hasError('required')"><p>La contraseña del usuario es obligatoria.</p></div>
+                                <div *ngIf="formUsuario.get('contrasena')?.hasError('minlength')"><p>La contraseña debe contener mínimo 8 caracteres.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="text" class="btn-cancelar" routerLink="/dashboard-usuarios">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formUsuario.invalid && submitted">
+                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>

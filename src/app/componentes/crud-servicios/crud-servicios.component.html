@@ -1,0 +1,62 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formServicio" (ngSubmit)="agregarOEditar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombreServicio">* Nombre del servicio:</label>
+                    <input type="text" class="form-control" id="nombreServicio" maxlength="50" formControlName="nombreServicio" required>
+                    <div *ngIf="formServicio.get('nombreServicio')?.invalid && (formServicio.get('nombreServicio')?.dirty || formServicio.get('nombreServicio')?.touched)">
+                        <div *ngIf="formServicio.get('nombreServicio')?.hasError('required')"><p>El nombre del servicio es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">* Descripción:</label>
+                    <textarea class="form-control no-resize" id="descripcion" maxlength="100" formControlName="descripcion" required></textarea>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formServicio.get('descripcion')?.invalid && (formServicio.get('descripcion')?.dirty || formServicio.get('descripcion')?.touched)">
+                        <div *ngIf="formServicio.get('descripcion')?.hasError('required')"><p>La descripción del servicio es obligatoria.</p></div>
+                    </div>
+                </div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="duracion">* Duración (minutos):</label>
+                            <input type="number" class="form-control" id="duracion" min="1" step="1" pattern="[0-9]+" inputmode="numeric" formControlName="duracion" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formServicio.get('duracion')?.invalid && (formServicio.get('duracion')?.dirty || formServicio.get('duracion')?.touched)">
+                                <div *ngIf="formServicio.get('duracion')?.hasError('required')"><p>La duracion del servicio es obligatoria.</p></div>
+                                <div *ngIf="formServicio.get('duracion')?.hasError('noNegativos')"><p>La duracion no puede ser negativa.</p></div>
+                                <div *ngIf="formServicio.get('duracion')?.hasError('noDecimales')"><p>La duracion no puede ser decimal.</p></div>
+                                <div *ngIf="formServicio.get('duracion')?.hasError('noCero')"><p>La duracion no puede ser cero.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="precio">* Precio (MXN):</label>
+                            <input type="number" class="form-control" id="precio" min="1" step="1" pattern="[0-9]+" inputmode="numeric" formControlName="precio" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formServicio.get('precio')?.invalid && (formServicio.get('precio')?.dirty || formServicio.get('precio')?.touched)">
+                                <div *ngIf="formServicio.get('precio')?.hasError('required')"><p>El precio del servicio es obligatorio.</p></div>
+                                <div *ngIf="formServicio.get('precio')?.hasError('noNegativos')"><p>El precio no puede ser negativo.</p></div>
+                                <div *ngIf="formServicio.get('precio')?.hasError('noDecimales')"><p>El precio no puede ser decimal.</p></div>
+                                <div *ngIf="formServicio.get('precio')?.hasError('noCero')"><p>El precio no puede ser cero.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="text" class="btn-cancelar" routerLink="/dashboard-servicios">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formServicio.invalid && submitted">
+                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

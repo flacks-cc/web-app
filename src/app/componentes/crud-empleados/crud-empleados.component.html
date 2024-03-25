@@ -1,0 +1,71 @@
+<div class="modal-overlay">
+
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formEmpleado" (ngSubmit)="agregarOEditar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombre">* Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" pattern="[A-Za-zÁ-Úá-ú ]+" maxlength="30" formControlName="nombre" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formEmpleado.get('nombre')?.invalid && (formEmpleado.get('nombre')?.dirty || formEmpleado.get('nombre')?.touched)">
+                        <div *ngIf="formEmpleado.get('nombre')?.hasError('required')"><p>El nombre del empleado es obligatorio.</p></div>
+                        <div *ngIf="formEmpleado.get('nombre')?.hasError('pattern')"><p>El nombre del empleado solo puede contener letras.</p></div>
+                    </div>
+                </div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="apellidoPaterno">* Apellido paterno:</label>
+                            <input type="text" class="form-control" id="apellidoPaterno" pattern="[A-Za-zÁ-Úá-ú]+" maxlength="20" formControlName="apellidoPaterno" required>
+                            <!-- Mensajes de validaciones para el formulario -->
+                            <div *ngIf="formEmpleado.get('apellidoPaterno')?.invalid && (formEmpleado.get('apellidoPaterno')?.dirty || formEmpleado.get('apellidoPaterno')?.touched)">
+                                <div *ngIf="formEmpleado.get('apellidoPaterno')?.hasError('required')"><p>El apellido del empleado es obligatorio.</p></div>
+                                <div *ngIf="formEmpleado.get('apellidoPaterno')?.hasError('pattern')"><p>El apellido solo puede contener letras.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="apellidoMaterno">Apellido materno:</label>
+                            <input type="text" class="form-control" id="apellidoMaterno" pattern="[A-Za-zÁ-Úá-ú]+" maxlength="20" formControlName="apellidoMaterno">
+                            <div *ngIf="formEmpleado.get('apellidoMaterno')?.dirty || formEmpleado.get('apellidoPaterno')?.touched">
+                                <div *ngIf="formEmpleado.get('apellidoMaterno')?.hasError('pattern')"><p>El apellido solo puede contener letras.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nombreUsuario">* Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" maxlength="20" formControlName="nombreUsuario" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formEmpleado.get('nombreUsuario')?.invalid && (formEmpleado.get('nombreUsuario')?.dirty || formEmpleado.get('nombreUsuario')?.touched)">
+                        <div *ngIf="formEmpleado.get('nombreUsuario')?.hasError('required')"><p>El nombre de usuario del empleado es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salario">* Salario (MXN):</label>
+                    <input type="number" class="form-control" id="salario" min="1" step="1" inputmode="numeric" formControlName="salario" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formEmpleado.get('salario')?.invalid && (formEmpleado.get('salario')?.dirty || formEmpleado.get('salario')?.touched)">
+                        <div *ngIf="formEmpleado.get('salario')?.hasError('required')"><p>El salario del empleado es obligatorio.</p></div>
+                        <div *ngIf="formEmpleado.get('salario')?.hasError('noNegativos')"><p>El salario no puede ser negativo.</p></div>
+                        <div *ngIf="formEmpleado.get('salario')?.hasError('noDecimales')"><p>El salario no puede ser decimal.</p></div>
+                        <div *ngIf="formEmpleado.get('salario')?.hasError('noCero')"><p>El salario no puede ser cero.</p></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="text" class="btn-cancelar" routerLink="/dashboard-empleados">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formEmpleado.invalid && submitted">
+                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

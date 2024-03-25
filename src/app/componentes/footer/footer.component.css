@@ -1,0 +1,153 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    transition: all 0.5s ease;
+}
+
+/* Pie de página */
+.footer {
+    width: 100%;
+    background-color: black;
+}
+
+.footer .grupo1 {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 50px;
+    padding: 45px 10px;
+    justify-items: center;
+}
+
+.footer .grupo1 .box {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+}
+
+.footer .grupo1 .box iframe {
+    width: 100%;
+    max-width: 300px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.footer .grupo1 .box figure {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.footer .grupo1 img {
+    max-width: 100%;
+    height: auto;
+    transform: 0.3;
+}
+
+.footer .grupo1 .box img:hover {
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.footer .grupo1 .box h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 18px;
+    text-align: left;
+}
+
+.footer .grupo1 .box p {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.footer .grupo1 .redes a {
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    margin-right: 18px;
+    background-color: rgba(20, 20, 20);
+    text-align: center;
+    transition: all 300ms ease;
+    margin-bottom: 18px;
+}
+
+.footer .grupo1 .redes a:hover {
+    color: goldenrod;
+}
+
+.footer .grupo1 a {
+    text-decoration: none;
+}
+
+.footer .grupo1 a p:hover {
+    text-decoration: none;
+    color: goldenrod;
+}
+
+.footer .grupo2 {
+    padding: 20px 10px;
+    background: rgb(5, 5, 5);
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.footer .btn {
+    display: inline-block;
+    background-color: rgba(20, 20, 20);
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+    text-align: left;
+}
+
+.footer a.btn {
+    text-align: center;
+}
+
+.footer .btn:hover {
+    color: goldenrod;
+}
+
+
+@media (max-width: 768px) {
+
+    /* Pie de página */
+    .footer .grupo1 {
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 30px;
+        padding: 40px 25px;
+        justify-items: left;
+    }
+}
+
+
+@media (max-width: 768px) {
+    /* Pie de página */
+    .footer .grupo1 {
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 30px;
+        padding: 40px 25px;
+        justify-items: left;
+    }
+}

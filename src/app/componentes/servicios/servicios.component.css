@@ -1,0 +1,80 @@
+#servicios .contenedor-servicios {
+    padding: 80px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#servicios img {
+    width: 75%;
+    transition: transform 0.3s;
+    margin-bottom: 10px;
+}
+
+#servicios img:hover {
+    transform: scale(1.05);
+}
+
+#servicios div {
+    display: grid;
+    place-items: center;
+    padding: 30px 20px;
+    flex-basis: calc(100% / 4);
+    box-sizing: border-box;
+}
+
+#servicios div h3 {
+    color: black;
+    font-size: 16px;
+    margin: 15px 0px;
+}
+
+#servicios div h4,
+#servicios div p {
+    color: black;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+#servicios div h5 {
+    font-size: 16px;
+    color: black;
+}
+
+
+@media (max-width: 1024px) {
+    #servicios div {
+        flex-basis: calc(100% / 2);
+    }
+
+    #servicios img {
+        width: 50%;
+    }
+
+    #servicios div h4,
+    #servicios div p {
+        color: #000000;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 768px) {
+#servicios {
+    position: relative;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    align-content: center;
+    }
+
+    #servicios img {
+        width: 75%;
+    }
+
+    #servicios div {
+        flex-basis: 100%;
+    }
+}
