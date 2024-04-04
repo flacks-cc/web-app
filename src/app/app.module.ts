@@ -52,14 +52,15 @@ import { CrudReservacionesComponent } from './componentes/crud-reservaciones/cru
     CrudServiciosComponent,
     CrudProductosComponent,
     DashboardReservacionesComponent,
-    CrudReservacionesComponent
+    CrudReservacionesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,168 @@
+CREATE TABLE Usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nombre_usuario VARCHAR(50) UNIQUE NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido_paterno VARCHAR(50) NOT NULL,
+    apellido_materno VARCHAR(50),
+    correo_electronico VARCHAR(100) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    numero_telefono VARCHAR(10) UNIQUE NOT NULL
+);
+
+CREATE TABLE Roles (
+    id_rol SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Usuarios_Roles (
+    id_usuario_rol SERIAL PRIMARY KEY,
+    id_usuario INT REFERENCES Usuarios(id_usuario) NOT NULL,
+    id_rol INT REFERENCES Roles(id_rol) NOT NULL
+);
+
+CREATE TABLE Productos (
+    id_producto SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    descripcion VARCHAR(255),
+    precio DECIMAL NOT NULL,
+    stock INT NOT NULL
+);
+
+CREATE TABLE Servicios (
+    id_servicio SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    descripcion VARCHAR(255),
+    precio DECIMAL NOT NULL,
+    duracion INTERVAL
+);
+
+CREATE TABLE Reservaciones (
+    id_reservacion SERIAL PRIMARY KEY,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    activa BOOLEAN NOT NULL DEFAULT true,
+    id_servicio INT REFERENCES Servicios(id_servicio),
+    id_cliente INT REFERENCES Usuarios(id_usuario),
+    id_empleado INT REFERENCES Usuarios(id_usuario)
+);
+
+CREATE TABLE Detalles_Productos (
+    id_detalle_producto SERIAL PRIMARY KEY,
+    cantidad INT NOT NULL,
+    total DECIMAL NOT NULL,
+    id_reservacion INT REFERENCES Reservaciones(id_reservacion) NOT NULL,
+    id_producto INT REFERENCES Productos(id_producto) NOT NULL
+);
+
+CREATE TABLE Metodos_Pago (
+    id_metodo_pago SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Tickets (
+    id_ticket SERIAL PRIMARY KEY,
+    fecha_hora_expedicion TIMESTAMP NOT NULL,
+    monto_total DECIMAL NOT NULL,
+    fecha_hora_pago TIMESTAMP,
+    monto_pagado DECIMAL,
+    cambio DECIMAL,
+    id_metodo_pago INT REFERENCES Metodos_Pago(id_metodo_pago),
+    id_empleado INT REFERENCES Usuarios(id_usuario),
+    id_reservacion INT REFERENCES Reservaciones(id_reservacion) NOT NULL
+);
+
+CREATE TABLE Resenas (
+    id_resena SERIAL PRIMARY KEY,
+    mensaje VARCHAR(255),
+    valoracion INT NOT NULL,
+    fecha_hora TIMESTAMP NOT NULL,
+    id_cliente INT REFERENCES Usuarios(id_usuario) NOT NULL,
+    id_producto INT REFERENCES Productos(id_producto),
+    id_servicio INT REFERENCES Servicios(id_servicio)
+);
+
+CREATE TABLE Mensajes_Contacto (
+    id_mensaje SERIAL PRIMARY KEY,
+    asunto VARCHAR(255) NOT NULL,
+    mensaje VARCHAR(255) NOT NULL,
+    adjunto VARCHAR(255),
+    fecha_hora TIMESTAMP NOT NULL,
+    id_cliente INT REFERENCES Usuarios(id_usuario) NOT NULL
+);
+
+CREATE TABLE Tarjetas (
+    id_tarjeta SERIAL PRIMARY KEY,
+    uid VARCHAR(8) UNIQUE NOT NULL,
+    id_cliente INT REFERENCES Usuarios(id_usuario) UNIQUE NOT NULL
+);
+
+INSERT INTO Usuarios (id_usuario, nombre_usuario, nombre, apellido_paterno, apellido_materno, correo_electronico, contraseña, numero_telefono)
+VALUES 
+(1, 'flacks', 'Michel Aldahir', 'Reyes', 'Salazar', 'aldahir.flacks@gmail.com', '12345678', '2718940012'),
+(2, 'cr1st1ansp', 'Jorge Christian', 'Serrano', 'Puertos', 'christiansp7231@gmail.com', '12345678', '2712667356'),
+(3, 'chuchito', 'Misrael', 'Florentino', 'Altamirano', 'misra.florentino@gmail.com', '12345678', '2718763906');
+
+INSERT INTO Roles (id_rol, nombre)
+VALUES 
+(1, 'Administrador'),
+(2, 'Empleado'),
+(3, 'Cliente');
+
+INSERT INTO Usuarios_Roles (id_usuario_rol, id_usuario, id_rol)
+VALUES 
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 3),
+(4, 3, 3);
+
+INSERT INTO Productos (id_producto, nombre, descripcion, precio, stock)
+VALUES 
+(1, 'Gel para cabello', 'Fijación fuerte', 10.00, 50),
+(2, 'Champú', 'Para todo tipo de cabello', 8.00, 100),
+(3, 'Cera para peinar', 'Brillo y control', 12.00, 30);
+
+INSERT INTO Servicios (id_servicio, nombre, descripcion, precio, duracion)
+VALUES 
+(1, 'Corte de cabello', 'Incluye lavado y secado', 20.00, '1 hour'),
+(2, 'Afeitado', 'Con productos de alta calidad', 15.00, '45 minutes'),
+(3, 'Manicura', 'Cuidado de manos y uñas', 10.00, '30 minutes');
+
+INSERT INTO Reservaciones (id_reservacion, fecha, hora, activa, id_servicio, id_cliente, id_empleado)
+VALUES 
+(1, '2024-04-03', '10:00', false, 1, 2, 1),
+(2, '2024-04-06', '15:30', true, 3, 3, 1),
+(3, '2024-04-07', '14:00', true, 2, 3, 1);
+
+INSERT INTO Detalles_Productos (id_detalle_producto, cantidad, total, id_reservacion, id_producto)
+VALUES 
+(1, 1, 10.00, 1, 1),
+(2, 2, 16.00, 1, 2),
+(3, 4, 48.00, 2, 3);
+
+INSERT INTO Metodos_Pago (id_metodo_pago, nombre)
+VALUES 
+(1, 'Efectivo'),
+(2, 'Terminal');
+
+INSERT INTO Tickets (id_ticket, fecha_hora_expedicion, monto_total, fecha_hora_pago, monto_pagado, cambio, id_metodo_pago, id_empleado, id_reservacion)
+VALUES 
+(1, '2024-04-02 22:00:00', 46.00, '2024-04-03 10:00:00', 50.00, 04.00, 1, 1, 1),
+(2, '2024-04-06 15:00:00', 58.00, NULL, NULL, NULL, NULL, 1, 2),
+(3, '2024-04-07 13:45:00', 15.00, NULL, NULL, NULL, NULL, 1, 3);
+
+INSERT INTO Resenas (id_resena, mensaje, valoracion, fecha_hora, id_cliente, id_producto, id_servicio)
+VALUES 
+(1, 'Excelente servicio, muy contento con mi corte.', 5, '2024-04-05 11:30:00', 2, NULL, 1),
+(2, 'El champú es genial, deja el cabello suave.', 4, '2024-04-06 16:45:00', 3, NULL, NULL),
+(3, 'La manicura fue rápida y bien hecha.', 4, '2024-04-07 15:15:00', 3, NULL, 3);
+
+INSERT INTO Mensajes_Contacto (id_mensaje, asunto, mensaje, adjunto, fecha_hora, id_cliente)
+VALUES 
+(1, 'Consulta sobre horarios', 'Quisiera saber si tienen disponibilidad para mañana por la tarde.', NULL, '2024-04-05 14:20:00', 3),
+(2, 'Reclamo por servicio', 'Tuve un inconveniente con el corte que me hicieron.', 'assets/img/reclamo.jpg', '2024-04-06 17:30:00', 2),
+(3, 'Sugerencia para mejorar', 'Me gustaría que ampliaran la variedad de productos en venta.', NULL, '2024-04-07 12:10:00', 3);
+
+INSERT INTO Tarjetas (id_tarjeta, uid, id_cliente)
+VALUES 
+(1, 'ABCD1234', 2),
+(2, 'EFGH5678', 3);

@@ -31,8 +31,8 @@ export class DashboardEmpleadosComponent implements OnInit {
       this.cerrarEliminarPopup();
 
       this.empleadoService.getAllEmployees().subscribe(response => {
-      this.empleados = response;
-    });
+        this.empleados = response;
+      });
     });
   }
 

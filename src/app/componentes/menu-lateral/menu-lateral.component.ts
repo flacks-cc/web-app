@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 export class MenuLateralComponent implements OnInit {
   // Agregar una variable de estado para rastrear si estamos en modo responsivo o no
   isResponsiveMode: boolean = false;
+  popupCerrarVisible: boolean = false;
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
     // Llamar a la función onResize cuando se carga el componente
@@ -119,5 +121,21 @@ export class MenuLateralComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  abrirCerrarPopup(): void {
+    this.popupCerrarVisible = true;
+  }
+
+  cerrarCerrarPopup(): void {
+    this.popupCerrarVisible = false;
+  }
+
+  // Método para cerrar la sesión
+    cierraSesion() {
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    this.router.navigate(['/menu']);
   }
 }

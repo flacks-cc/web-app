@@ -6,7 +6,27 @@
             <p>Administrador</p>
         </div>
         <i class='bx bx-menu' id="menu" (click)="toggleAside()"></i>
+
+        <!-- Popup para cerrar sesión -->
+        <div class="modal-overlay eliminar" *ngIf="popupCerrarVisible">
+            <div class="modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Advertencia</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="msj-eliminar">
+                        <p>¿Estás seguro de quieres cerrar sesión?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-cancelar" (click)="cerrarCerrarPopup()">No</button>
+                        <button class="btn-eliminar" (click)="cierraSesion()">Sí</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
     <div class="options">
         <div routerLink="/dashboard-usuarios">
             <i class='bx bxs-user'></i>
@@ -32,9 +52,9 @@
             <i class='bx bxs-calendar'></i>
             <span class="option">Reservaciones</span>
         </div>
-        <div class="logout" routerLink="/login">
+        <div class="logout">
             <i class='bx bxs-log-out'></i>
-            <span class="option">Cerrar sesión</span>
+            <span class="option" (click)="abrirCerrarPopup()">Cerrar sesión</span>
         </div>
     </div>
 </aside>

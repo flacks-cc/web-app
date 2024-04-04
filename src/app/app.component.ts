@@ -25,31 +25,31 @@ export class AppComponent implements AfterViewInit {
   // Método para determinar si se deben ocultar la barra de navegación y el pie de página
   HideNavFooter(): boolean {
     // Secciones en donde se esta ocultando la barra de navegación y el pie de página
-    return this.router.url === '/login' || 
+    return this.router.url === '/login' ||
 
-           this.router.url === '/dashboard-usuarios' ||
-           this.router.url === '/crud-usuarios' ||
-           this.router.url.startsWith('/editar-usuario/') ||
+      this.router.url === '/dashboard-usuarios' ||
+      this.router.url === '/crud-usuarios' ||
+      this.router.url.startsWith('/editar-usuario/') ||
 
-           this.router.url === '/dashboard-empleados' ||
-           this.router.url === '/crud-empleados' ||
-           this.router.url.startsWith('/editar-empleado/') ||
+      this.router.url === '/dashboard-empleados' ||
+      this.router.url === '/crud-empleados' ||
+      this.router.url.startsWith('/editar-empleado/') ||
 
-           this.router.url === '/dashboard-clientes' ||
-           this.router.url === '/crud-clientes' ||
-           this.router.url.startsWith('/editar-cliente/') ||
+      this.router.url === '/dashboard-clientes' ||
+      this.router.url === '/crud-clientes' ||
+      this.router.url.startsWith('/editar-cliente/') ||
 
-           this.router.url === '/dashboard-productos' ||
-           this.router.url === '/crud-productos' ||
-           this.router.url.startsWith('/editar-producto/') ||
+      this.router.url === '/dashboard-productos' ||
+      this.router.url === '/crud-productos' ||
+      this.router.url.startsWith('/editar-producto/') ||
 
-           this.router.url === '/dashboard-servicios' ||
-           this.router.url === '/crud-servicios' ||
-           this.router.url.startsWith('/editar-servicio/') ||
+      this.router.url === '/dashboard-servicios' ||
+      this.router.url === '/crud-servicios' ||
+      this.router.url.startsWith('/editar-servicio/') ||
 
-           this.router.url === '/dashboard-reservaciones' ||
-           this.router.url === '/crud-reservaciones' ||
-           this.router.url.startsWith('/editar-reservacion/');
+      this.router.url === '/dashboard-reservaciones' ||
+      this.router.url === '/crud-reservaciones' ||
+      this.router.url.startsWith('/editar-reservacion/');
   }
 
   // Método para establecer la pestaña activa en la barra de navegación

@@ -18,6 +18,7 @@ import { DashboardProductosComponent } from './componentes/dashboard-productos/d
 import { CrudProductosComponent } from './componentes/crud-productos/crud-productos.component';
 import { DashboardReservacionesComponent } from './componentes/dashboard-reservaciones/dashboard-reservaciones.component';
 import { CrudReservacionesComponent } from './componentes/crud-reservaciones/crud-reservaciones.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -47,75 +48,93 @@ const routes: Routes = [
   },
   {
     path: 'dashboard-usuarios',
-    component: DashboardUsuariosComponent
+    component: DashboardUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-usuarios',
-    component: CrudUsuariosComponent
+    component: CrudUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-usuario/:idUsuario',
-    component: CrudUsuariosComponent
+    component: CrudUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard-empleados',
-    component: DashboardEmpleadosComponent
+    component: DashboardEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-empleados',
-    component: CrudEmpleadosComponent
+    component: CrudEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-empleado/:idEmpleado',
-    component: CrudEmpleadosComponent
+    component: CrudEmpleadosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard-clientes',
-    component: DashboardClientesComponent
+    component: DashboardClientesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-clientes',
-    component: CrudClientesComponent
+    component: CrudClientesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-cliente/:idCliente',
-    component: CrudClientesComponent
+    component: CrudClientesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard-servicios',
-    component: DashboardServiciosComponent
+    component: DashboardServiciosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-servicios',
-    component: CrudServiciosComponent
+    component: CrudServiciosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-servicio/:idServicio',
-    component: CrudServiciosComponent
+    component: CrudServiciosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard-productos',
-    component: DashboardProductosComponent
+    component: DashboardProductosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-productos',
-    component: CrudProductosComponent
+    component: CrudProductosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-producto/:idProducto',
-    component: CrudProductosComponent
+    component: CrudProductosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard-reservaciones',
-    component: DashboardReservacionesComponent
+    component: DashboardReservacionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crud-reservaciones',
-    component: CrudReservacionesComponent
+    component: CrudReservacionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editar-reservacion/:idReservacion',
-    component: CrudReservacionesComponent
+    component: CrudReservacionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
