@@ -18,6 +18,9 @@
                             <thead>
                                 <tr>
                                     <th hidden>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
                                     <th>Nombre de usuario</th>
                                     <th>Correo electrónico</th>
                                     <th hidden>Contraseña</th>
@@ -28,10 +31,13 @@
                             <tbody>
                                 <!-- Filas de la tabla con los usuarios -->
                                 <tr *ngFor="let u of usuarios; let i = index">
-                                    <td hidden>{{ u.idUsuario }}</td>
+                                    <td hidden>{{ u.id }}</td>
+                                    <td>{{ u.nombre }}</td>
+                                    <td>{{ u.apellidoPaterno }}</td>
+                                    <td>{{ u.apellidoMaterno }}</td>
                                     <td>{{ u.nombreUsuario }}</td>
-                                    <td>{{ u.correo }}</td>
-                                    <td hidden>{{ u.contrasena }}</td>
+                                    <td>{{ u.email }}</td>
+                                    <td hidden>{{ u.password }}</td>
                                     <td>{{ u.telefono }}</td>
                                     <td>
                                         <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-usuario/', u.idUsuario]"></i>

@@ -7,28 +7,28 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  private URL = "http://localhost:8080/apiP/usuarios";
+  private URL = "http://localhost:8080/auth";
 
   constructor(private httpClient: HttpClient) { }
 
   public getAllUsers(): Observable<any> {
-    return this.httpClient.get(this.URL);
+    return this.httpClient.get(`${this.URL}/usuarios`); // Ruta para obtener todos los usuarios
   }
 
-  public getUser(idUsuario: any): Observable<any> {
-    return this.httpClient.get(this.URL + "/" + idUsuario);
+  public getUser(id: any): Observable<any> {
+    return this.httpClient.get(`${this.URL}/usuarios/${id}`); // Ruta para obtener un usuario por su ID
   }
 
   public createUser(user: any): Observable<any> {
-    return this.httpClient.post(this.URL, user);
+    return this.httpClient.post(`${this.URL}/nuevo`, user); // Ruta para crear un nuevo usuario
   }
 
-  public deleteUser(idUsuario: any): Observable<any> {
-    return this.httpClient.delete(this.URL + "/" + idUsuario);
+  public deleteUser(id: any): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/usuarios/${id}`); // Ruta para eliminar un usuario por su ID
   }
 
-  public updateUser(idUsuario: any, user: any) {
-    return this.httpClient.put(this.URL + "/" + idUsuario, user);
+  public updateUser(id: any, user: any) {
+    return this.httpClient.put(`${this.URL}/usuarios/${id}`, user); // Ruta para actualizar un usuario por su ID
   }
 
 }

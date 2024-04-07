@@ -24,15 +24,15 @@ export class DashboardUsuariosComponent implements OnInit {
   }
 
   eliminar(usuario: any): void {
-    this.usuarioService.deleteUser(usuario.idUsuario).subscribe(response => {
+    this.usuarioService.deleteUser(usuario.id).subscribe(response => {
       if (response.deleted === true) {
         this.usuarios.splice(this.indiceUsuarioAEliminar, 1);
       }
       this.cerrarEliminarPopup();
 
       this.usuarioService.getAllUsers().subscribe(response => {
-      this.usuarios = response;
-    });
+        this.usuarios = response;
+      });
     });
   }
 

@@ -14,20 +14,23 @@ export class CrudUsuariosComponent implements OnInit {
   submitted = false;
   uniqueError: string | null = null;
   formUsuario: FormGroup;
-  idUsuario: any | null;
+  id: any | null;
 
   constructor(public fb: FormBuilder,
-              public usuarioService: UsuarioService,
-              private router: Router,
-              private aRoute: ActivatedRoute) {
+    public usuarioService: UsuarioService,
+    private router: Router,
+    private aRoute: ActivatedRoute) {
     this.formUsuario = this.fb.group({
+      nombre: ['', [Validators.required, Validators.pattern('^[A-ZÑa-zñáéíóúÁÉÍÓÚüÜ\s\'\-]+$')]],
+      apellidoPaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
+      apellidoMaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
       nombreUsuario: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
-      contrasena: ['', [Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]]
     });
 
-    this.idUsuario = this.aRoute.snapshot.paramMap.get('idUsuario');
+    this.id = this.aRoute.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
@@ -35,29 +38,35 @@ export class CrudUsuariosComponent implements OnInit {
   }
 
   esEditar() {
-    if (this.idUsuario !== null) {
+    if (this.id !== null) {
       this.titulo = 'Editar usuario';
-      this.usuarioService.getUser(this.idUsuario).subscribe(response => {
+      this.usuarioService.getUser(this.id).subscribe(response => {
 
         this.formUsuario.setValue({
+          nombre: response.nombre,
+          apellidoPaterno: response.apellidoPaterno,
+          apellidoMaterno: response.apellidoMaterno,
           nombreUsuario: response.nombreUsuario,
-          correo: response.correo,
-          contrasena: response.contrasena,
-          telefono: response.telefono
+          email: response.email,
+          password: response.password,
+          telefono: response.telefono        
         });
       });
     }
   }
 
-  editar(idUsuario: any): void {
+  editar(id: any): void {
     const usuario: any = {
+      nombre: this.formUsuario.value.nombre,
+      apellidoPaterno: this.formUsuario.value.apellidoPaterno,
+      apellidoMaterno: this.formUsuario.value.apellidoMaterno,
       nombreUsuario: this.formUsuario.value.nombreUsuario,
-      correo: this.formUsuario.value.correo,
-      contrasena: this.formUsuario.value.contrasena,
+      email: this.formUsuario.value.email,
+      password: this.formUsuario.value.password,
       telefono: this.formUsuario.value.telefono
     };
 
-    this.usuarioService.updateUser(idUsuario, usuario).subscribe(response => {
+    this.usuarioService.updateUser(id, usuario).subscribe(response => {
       this.router.navigate(['dashboard-usuarios']);
     },
       error => {
@@ -95,9 +104,9 @@ export class CrudUsuariosComponent implements OnInit {
       return;
     }
 
-    if (this.idUsuario === null)
+    if (this.id === null)
       this.agregar();
     else
-      this.editar(this.idUsuario);
+      this.editar(this.id);
   }
 }
