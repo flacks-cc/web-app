@@ -1,140 +1,82 @@
 <div class="modal-overlay">
-
     <div class="modal">
         <div class="modal-header">
             <h5 class="modal-title">{{ titulo }}</h5>
         </div>
         <div class="modal-body">
-            <form [formGroup]="formUsuario" (ngSubmit)="agregarOEditar()" autocomplete="off">
-
+            <form [formGroup]="formularioUsuario" (ngSubmit)="guardar()" autocomplete="off">
                 <div class="form-group">
                     <label for="nombre">* Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" maxlength="20"
-                        formControlName="nombre" required>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
                     <!-- Mensajes de validaciones para el formulario -->
-                    <div
-                        *ngIf="formUsuario.get('nombre')?.invalid && (formUsuario.get('nombre')?.dirty || formUsuario.get('nombre')?.touched)">
-                        <div *ngIf="formUsuario.get('nombre')?.hasError('required')">
-                            <p>El nombre de usuario es obligatorio.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="apellidoPaterno">* Apellido paterno:</label>
-                            <input type="text" class="form-control" id="apellidoPaterno" maxlength="20"
-                                formControlName="apellidoPaterno" required>
-                            <!-- Mensajes de validaciones para el formulario -->
-                            <div
-                                *ngIf="formUsuario.get('apellidoPaterno')?.invalid && (formUsuario.get('apellidoPaterno')?.dirty || formUsuario.get('apellidoPaterno')?.touched)">
-                                <div *ngIf="formUsuario.get('apellidoPaterno')?.hasError('required')">
-                                    <p>El nombre de usuario es obligatorio.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="apellidoMaterno">Apellido materno:</label>
-                            <input type="text" class="form-control" id="apellidoMaterno" maxlength="20"
-                                formControlName="apellidoMaterno" required>
-                            <!-- Mensajes de validaciones para el formulario -->
-                            <div
-                                *ngIf="formUsuario.get('apellidoMaterno')?.invalid && (formUsuario.get('apellidoMaterno')?.dirty || formUsuario.get('apellidoMaterno')?.touched)">
-                                <div *ngIf="formUsuario.get('apellidoMaterno')?.hasError('required')">
-                                    <p>El nombre de usuario es obligatorio.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div *ngIf="formularioUsuario.get('nombre')?.invalid && (formularioUsuario.get('nombre')?.dirty || formularioUsuario.get('nombre')?.touched)">
+                        <div *ngIf="formularioUsuario.get('nombre')?.hasError('required')"><p>El nombre es obligatorio.</p></div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nombreUsuario">* Nombre de usuario:</label>
-                    <input type="text" class="form-control" id="nombreUsuario" maxlength="20"
-                        formControlName="nombreUsuario" required>
+                    <label for="apellidoPaterno">* Apellido Paterno:</label>
+                    <input type="text" class="form-control" id="apellidoPaterno" formControlName="apellidoPaterno" required>
                     <!-- Mensajes de validaciones para el formulario -->
-                    <div
-                        *ngIf="formUsuario.get('nombreUsuario')?.invalid && (formUsuario.get('nombreUsuario')?.dirty || formUsuario.get('nombreUsuario')?.touched)">
-                        <div *ngIf="formUsuario.get('nombreUsuario')?.hasError('required')">
-                            <p>El nombre de usuario es obligatorio.</p>
-                        </div>
+                    <div *ngIf="formularioUsuario.get('apellidoPaterno')?.invalid && (formularioUsuario.get('apellidoPaterno')?.dirty || formularioUsuario.get('apellidoPaterno')?.touched)">
+                        <div *ngIf="formularioUsuario.get('apellidoPaterno')?.hasError('required')"><p>El apellido paterno es obligatorio.</p></div>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="telefono">* Número de teléfono:</label>
-                    <input type="text" class="form-control" id="telefono" pattern="[0-9]+" inputmode="numeric"
-                        minlength="10" maxlength="10" formControlName="telefono" required>
+                    <label for="apellidoMaterno">* Apellido Materno:</label>
+                    <input type="text" class="form-control" id="apellidoMaterno" formControlName="apellidoMaterno">
                     <!-- Mensajes de validaciones para el formulario -->
-                    <div
-                        *ngIf="formUsuario.get('telefono')?.invalid && (formUsuario.get('telefono')?.dirty || formUsuario.get('telefono')?.touched)">
-                        <div *ngIf="formUsuario.get('telefono')?.hasError('required')">
-                            <p>El número teléfono del usuario es obligatorio.</p>
-                        </div>
-                        <div *ngIf="formUsuario.get('telefono')?.hasError('pattern')">
-                            <p>El número de teléfono solo puede contener números.</p>
-                        </div>
-                        <div *ngIf="formUsuario.get('telefono')?.hasError('minlength')">
-                            <p>El número de teléfono debe contener 10 caracteres</p>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">* Teléfono:</label>
+                    <input type="tel" class="form-control" id="telefono" formControlName="telefono">
+                    <!-- Mensajes de validaciones para el formulario -->
+                </div>
+                <div class="form-group">
+                    <label for="nombreUsuario">* Nombre de Usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioUsuario.get('nombreUsuario')?.invalid && (formularioUsuario.get('nombreUsuario')?.dirty || formularioUsuario.get('nombreUsuario')?.touched)">
+                        <div *ngIf="formularioUsuario.get('nombreUsuario')?.hasError('required')"><p>El nombre de usuario es obligatorio.</p></div>
                     </div>
                 </div>
-
-                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
-                <div class="form-row">
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="email">* Correo electrónico:</label>
-                            <input type="email" class="form-control" id="email"
-                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" formControlName="email"
-                                placeholder="example@gmail.com" required>
-                            <!-- Mensajes de validaciones para el formulario -->
-                            <div
-                                *ngIf="formUsuario.get('email')?.invalid && (formUsuario.get('email')?.dirty || formUsuario.get('email')?.touched)">
-                                <div *ngIf="formUsuario.get('email')?.hasError('required')">
-                                    <p>El correo del usuario es obligatorio.</p>
-                                </div>
-                                <div *ngIf="formUsuario.get('email')?.hasError('pattern')">
-                                    <p>Use un formato adecuado para el correo.</p>
-                                </div>
-                                <div *ngIf="uniqueError">
-                                    <p>{{ uniqueError }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-col">
-                        <div class="form-group">
-                            <label for="password">* Contraseña:</label>
-                            <input type="password" class="form-control" id="password" minlength="8"
-                                formControlName="password" required>
-                            <!-- Mensajes de validaciones para el formulario -->
-                            <div
-                                *ngIf="formUsuario.get('password')?.invalid && (formUsuario.get('password')?.dirty || formUsuario.get('password')?.touched)">
-                                <div *ngIf="formUsuario.get('password')?.hasError('required')">
-                                    <p>La contraseña del usuario es obligatoria.</p>
-                                </div>
-                                <div *ngIf="formUsuario.get('password')?.hasError('minlength')">
-                                    <p>La contraseña debe contener mínimo 8 caracteres.</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label for="email">* Correo electrónico:</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioUsuario.get('email')?.invalid && (formularioUsuario.get('email')?.dirty || formularioUsuario.get('email')?.touched)">
+                        <div *ngIf="formularioUsuario.get('email')?.hasError('required')"><p>El correo electrónico es obligatorio.</p></div>
+                        <div *ngIf="formularioUsuario.get('email')?.hasError('email')"><p>Ingrese un correo electrónico válido.</p></div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="password">* Contraseña:</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioUsuario.get('password')?.invalid && (formularioUsuario.get('password')?.dirty || formularioUsuario.get('password')?.touched)">
+                        <div *ngIf="formularioUsuario.get('password')?.hasError('required')"><p>La contraseña es obligatoria.</p></div>
+                    </div>
+                </div>
+                <div class="form-group" id="rolFormGroup">
+                    <label>Rol</label>
+                    <select name="rol" id="rol" formControlName="roles" multiple [(ngModel)]="selectedRoles" size="2" style="font-size: 17px;">
+                      <option value="user">Usuario</option>
+                      <option value="admin">Administrador</option>
+                    </select>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioUsuario.get('roles')?.invalid">
+                      <div *ngIf="formularioUsuario.get('roles')?.hasError('required')"><p>Debe seleccionar al menos un rol.</p></div>
+                      <div *ngIf="formularioUsuario.get('roles')?.hasError('noRolesSeleccionados')"><p>Debe seleccionar al menos un rol.</p></div> <!-- Nuevo mensaje para la validación personalizada -->
+                    </div>
+                  </div>                                                
                 <div class="modal-footer">
-                    <button type="text" class="btn-cancelar" routerLink="/dashboard-usuarios">Cancelar</button>
+                    <button type="button" class="btn-cancelar" routerLink="/dashboard-usuarios">Cancelar</button>
                     <button type="submit" class="btn-primary">Guardar</button>
                 </div>
-                <div *ngIf="formUsuario.invalid && submitted">
-                    <p>Por favor, ingresa correctamente todos los campos antes de guardar.</p>
+                <div *ngIf="formularioUsuario.invalid && enviado">
+                    <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
                 </div>
             </form>
         </div>
     </div>
-
 </div>
