@@ -7,27 +7,31 @@ import { Observable } from 'rxjs';
 })
 export class ProductoService {
 
-  private URL = "http://localhost:8080/apiP/productos";
+  private URL = "http://localhost:8080/producto";
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllProducts(): Observable<any> {
-    return this.httpClient.get(this.URL);
+  public obtenerLista(): Observable<any> {
+    return this.httpClient.get(`${this.URL}/lista`);
   }
 
-  public getProduct(idProducto: any): Observable<any> {
-    return this.httpClient.get(this.URL + "/" + idProducto);
+  public obtenerDetallePorId(id: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detail/${id}`);
   }
 
-  public createProduct(product: any): Observable<any> {
-    return this.httpClient.post(this.URL, product);
+  public obtenerDetallePorNombre(nombre: string): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detailname/${nombre}`);
   }
 
-  public deleteProduct(idProducto: any): Observable<any> {
-    return this.httpClient.delete(this.URL + "/" + idProducto);
+  public eliminarProducto(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/delete/${id}`);
   }
 
-  public updateProduct(idProducto: any, product: any) {
-    return this.httpClient.put(this.URL + "/" + idProducto, product);
+  public crearProducto(nuevoProducto: any): Observable<any> {
+    return this.httpClient.post(`${this.URL}/create`, nuevoProducto);
+  }
+
+  public actualizarProducto(id: number, productoActualizado: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/update/${id}`, productoActualizado);
   }
 }

@@ -6,35 +6,37 @@
         <div class="card">
             <div class="card-body">
                 <div class="container-dash">
-                    <!-- Sección del dashboard para administrar reservaciones -->
+                    <!-- Sección del dashboard para administrar reseñas -->
                     <div>
                         <div class="title-container">
-                            <h2>Administrar reservaciones</h2>
-                            <button routerLink="/crud-reservaciones">Agregar reservación</button>
+                            <h2>Administrar reseñas</h2>
+                            <button routerLink="/crud-resenas">Agregar reseña</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Id Reservación</th>
-                                    <th>Fecha</th>
-                                    <th>Hora Inicio</th>
-                                    <th>Hora Fin</th>
+                                    <th>Id Reseña</th>
+                                    <th>Mensaje</th>
+                                    <th>Valoración</th>
+                                    <th>Fecha y Hora</th>
                                     <th>Id Usuario</th>
                                     <th>Id Servicio</th>
+                                    <th>Id Producto</th>
                                     <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Filas de la tabla con las reservaciones -->
-                                <tr *ngFor="let r of reservaciones; let i = index">
+                                <!-- Filas de la tabla con las reseñas -->
+                                <tr *ngFor="let r of resenas; let i = index">
                                     <td>{{ r?.id }}</td>
-                                    <td>{{ r?.fechaReserva }}</td>
-                                    <td>{{ r?.horaInicio }}</td>
-                                    <td>{{ r?.horaFin }}</td>
+                                    <td>{{ r?.mensaje }}</td>
+                                    <td>{{ r?.valoracion }}</td>
+                                    <td>{{ r?.fechaResena }}</td>
                                     <td>{{ r?.usuario?.nombre }}</td>
                                     <td>{{ r?.servicio?.nombre }}</td>
+                                    <td>{{ r?.producto?.nombre }}</td>
                                     <td>
-                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-reservacion/', r.id]"></i>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-resena/', r.id]"></i>
                                         <i class="far fa-trash-alt fa-lg text-danger" (click)="abrirEliminarPopup(i)"></i>
                                     </td>
                                 </tr>
@@ -50,11 +52,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="msj-eliminar">
-                                    <p>¿Estás seguro de que deseas eliminar esta reservación?</p>
+                                    <p>¿Estás seguro de que deseas eliminar esta reseña?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn-cancelar" (click)="cerrarEliminarPopup()">Cancelar</button>
-                                    <button class="btn-eliminar" (click)="eliminar(reservaciones[indiceReservacionAEliminar])">Eliminar</button>
+                                    <button class="btn-eliminar" (click)="eliminar(resenas[indiceResenaAEliminar])">Eliminar</button>
                                 </div>
                             </div>
                         </div>

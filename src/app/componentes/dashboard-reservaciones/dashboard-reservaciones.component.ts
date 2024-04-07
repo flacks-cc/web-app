@@ -8,32 +8,46 @@ import { ReservacionService } from 'src/app/servicios/reservacion/reservacion.se
 })
 export class DashboardReservacionesComponent implements OnInit {
 
+  reservaciones: any[] = [];
   popupEliminarVisible: boolean = false;
-  reservaciones: any;
   indiceReservacionAEliminar: number = -1;
 
   constructor(private reservacionService: ReservacionService) { }
 
   ngOnInit(): void {
-    this.reservacionService.getAllReservations().subscribe(response => {
-      this.reservaciones = response;
-    },
-      error => {
-        console.error(error)
-      });
+    this.cargarReservaciones();
   }
 
-  eliminar(reservacion: any) {
-    this.reservacionService.deleteReservation(reservacion.idReservacion).subscribe(response => {
-      if (response.deleted == true) {
-        this.reservaciones.splice(this.indiceReservacionAEliminar, 1);
+  cargarReservaciones(): void {
+    this.reservacionService.listarReservaciones().subscribe(
+      (response) => {
+        this.reservaciones = response;
+      },
+      (error) => {
+        console.error(error);
       }
-      this.cerrarEliminarPopup();
+    );
+  }
 
-      this.reservacionService.getAllReservations().subscribe(response => {
-      this.reservaciones = response;
-    });
-    });
+  eliminar(reservacion: any): void {
+    const idReservacion: number = reservacion.id;
+    if (!isNaN(idReservacion)) {
+      this.reservacionService.eliminarReservacion(idReservacion).subscribe(
+        (response) => {
+          console.log("Respuesta del servidor:", response);
+          if (response.deleted === true) {
+            this.reservaciones.splice(this.indiceReservacionAEliminar, 1);
+          }
+          this.cerrarEliminarPopup();
+          this.cargarReservaciones();
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error("ID de reservación no válido:", reservacion.id);
+    }
   }
 
   abrirEliminarPopup(indice: number): void {
@@ -45,4 +59,5 @@ export class DashboardReservacionesComponent implements OnInit {
     this.popupEliminarVisible = false;
     this.indiceReservacionAEliminar = -1;
   }
+
 }

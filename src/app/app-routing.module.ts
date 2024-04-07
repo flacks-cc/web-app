@@ -20,6 +20,12 @@ import { DashboardReservacionesComponent } from './componentes/dashboard-reserva
 import { CrudReservacionesComponent } from './componentes/crud-reservaciones/crud-reservaciones.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NuevoComponent } from './componentes/nuevo/nuevo.component';
+import { DashboardCategoriasComponent } from './componentes/dashboard-categorias/dashboard-categorias.component';
+import { CrudCategoriasComponent } from './componentes/crud-categorias/crud-categorias.component';
+import { DashboardResenasComponent } from './componentes/dashboard-resenas/dashboard-resenas.component';
+import { CrudResenasComponent } from './componentes/crud-resenas/crud-resenas.component';
+import { DashboardPagosComponent } from './componentes/dashboard-pagos/dashboard-pagos.component';
+import { CrudPagosComponent } from './componentes/crud-pagos/crud-pagos.component';
 
 
 const routes: Routes = [
@@ -106,6 +112,21 @@ const routes: Routes = [
     canActivate: [AuthGuard] 
   },
   {
+    path: 'editar-categoria/:id',
+    component: CrudCategoriasComponent,
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'crud-categorias',
+    component: CrudCategoriasComponent,
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'dashboard-categorias',
+    component: DashboardCategoriasComponent,
+    canActivate: [AuthGuard] 
+  },
+  {
     path: 'dashboard-productos',
     component: DashboardProductosComponent,
   },
@@ -114,8 +135,20 @@ const routes: Routes = [
     component: CrudProductosComponent,
   },
   {
-    path: 'editar-producto/:idProducto',
+    path: 'editar-producto/:id',
     component: CrudProductosComponent,
+  },
+  {
+    path: 'dashboard-resenas',
+    component: DashboardResenasComponent,
+  },
+  {
+    path: 'crud-resenas',
+    component: CrudResenasComponent,
+  },
+  {
+    path: 'editar-resena/:id',
+    component: CrudResenasComponent,
   },
   {
     path: 'dashboard-reservaciones',
@@ -126,8 +159,20 @@ const routes: Routes = [
     component: CrudReservacionesComponent,
   },
   {
-    path: 'editar-reservacion/:idReservacion',
+    path: 'editar-reservacion/:id',
     component: CrudReservacionesComponent,
+  },
+  {
+    path: 'dashboard-pagos',
+    component: DashboardPagosComponent,
+  },
+  {
+    path: 'crud-pagos',
+    component: CrudPagosComponent,
+  },
+  {
+    path: 'editar-pago/:id',
+    component: CrudPagosComponent,
   },
   {
     path: '',

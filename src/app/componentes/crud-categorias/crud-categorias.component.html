@@ -1,0 +1,31 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formularioCategoria" (ngSubmit)="guardar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="nombre">* Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioCategoria.get('nombre')?.invalid && (formularioCategoria.get('nombre')?.dirty || formularioCategoria.get('nombre')?.touched)">
+                        <div *ngIf="formularioCategoria.get('nombre')?.hasError('required')"><p>El nombre es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+                    <!-- Mensajes de validaciones para el formulario -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" routerLink="/dashboard-categorias">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formularioCategoria.invalid && enviado">
+                    <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

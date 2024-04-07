@@ -29,6 +29,12 @@ import { DashboardReservacionesComponent } from './componentes/dashboard-reserva
 import { CrudReservacionesComponent } from './componentes/crud-reservaciones/crud-reservaciones.component';
 import { NuevoComponent } from './componentes/nuevo/nuevo.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DashboardCategoriasComponent } from './componentes/dashboard-categorias/dashboard-categorias.component';
+import { CrudCategoriasComponent } from './componentes/crud-categorias/crud-categorias.component';
+import { CrudResenasComponent } from './componentes/crud-resenas/crud-resenas.component';
+import { DashboardResenasComponent } from './componentes/dashboard-resenas/dashboard-resenas.component';
+import { DashboardPagosComponent } from './componentes/dashboard-pagos/dashboard-pagos.component';
+import { CrudPagosComponent } from './componentes/crud-pagos/crud-pagos.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,12 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     DashboardReservacionesComponent,
     CrudReservacionesComponent,
     NuevoComponent,
+    DashboardCategoriasComponent,
+    CrudCategoriasComponent,
+    CrudResenasComponent,
+    DashboardResenasComponent,
+    DashboardPagosComponent,
+    CrudPagosComponent,
   ],
   imports: [
     BrowserModule,

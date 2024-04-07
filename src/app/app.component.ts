@@ -39,19 +39,31 @@ export class AppComponent implements AfterViewInit {
       this.router.url === '/crud-clientes' ||
       this.router.url.startsWith('/editar-cliente/') ||
 
-      this.router.url === '/dashboard-productos' ||
-      this.router.url === '/crud-productos' ||
-      this.router.url.startsWith('/editar-producto/') ||
-
       this.router.url === '/dashboard-servicios' ||
       this.router.url === '/crud-servicios' ||
       this.router.url.startsWith('/editar-servicio/') ||
 
       this.router.url === '/dashboard-reservaciones' ||
       this.router.url === '/crud-reservaciones' ||
-      this.router.url.startsWith('/editar-reservacion/');
-  }
+      this.router.url.startsWith('/editar-reservacion/') ||
+      
+      this.router.url === '/dashboard-categorias' ||
+      this.router.url === '/crud-categorias' ||
+      this.router.url.startsWith('/editar-categoria/')||
 
+      this.router.url === '/dashboard-resenas' ||
+      this.router.url === '/crud-resenas' ||
+      this.router.url.startsWith('/editar-resena/')||
+
+      this.router.url === '/dashboard-pagos' ||
+      this.router.url === '/crud-pagos' ||
+      this.router.url.startsWith('/editar-pago/')||
+
+      this.router.url === '/dashboard-productos' ||
+      this.router.url === '/crud-productos' ||
+      this.router.url.startsWith('/editar-producto/');
+      }
+      
   // Método para establecer la pestaña activa en la barra de navegación
   private setActiveTab() {
     // Obtiene la ruta actual del enrutador

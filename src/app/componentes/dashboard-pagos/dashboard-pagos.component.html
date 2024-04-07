@@ -6,35 +6,29 @@
         <div class="card">
             <div class="card-body">
                 <div class="container-dash">
-                    <!-- Sección del dashboard para administrar productos -->
+                    <!-- Sección del dashboard para administrar pagos -->
                     <div>
                         <div class="title-container">
-                            <h2>Administrar productos</h2>
-                            <button routerLink="/crud-productos">Agregar producto</button>
+                            <h2>Administrar pagos</h2>
+                            <!-- Button to add payment -->
+                            <button routerLink="/crud-pagos">Agregar pago</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID Producto</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Total de productos</th>
-                                    <th>Precio</th>
-                                    <th>ID Categoría</th>
-                                    <!-- Acciones CRUD -->
+                                    <th>ID de Pago</th>
+                                    <th>Método de Pago</th>
+                                    <!-- Actions CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Filas de la tabla con los productos -->
-                                <tr *ngFor="let p of productos; let i = index">
-                                    <td>{{ p?.id }}</td>
-                                    <td>{{ p?.nombre }}</td>
-                                    <td>{{ p?.descripcion }}</td>
-                                    <td>{{ p?.cantidadTotal }}</td>
-                                    <td>{{ p?.precio }}</td>
-                                    <td>{{ p?.categoria.nombre }}</td>
+                                <!-- Rows of the table with payments -->
+                                <tr *ngFor="let pago of pagos; let i = index">
+                                    <td>{{ pago?.id }}</td>
+                                    <td>{{ pago?.metodoNombre }}</td>
+                                    <!-- Edit and Delete actions -->
                                     <td>
-                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-producto/', p.id]" (click)="mostrarId(p.id)"></i>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-pago/', pago.id]" (click)="mostrarId(pago.id)"></i>
                                         <i (click)="abrirEliminarPopup(i)" class="far fa-trash-alt fa-lg text-danger"></i>
                                     </td>
                                 </tr>
@@ -42,7 +36,7 @@
                         </table>
                     </div>
 
-                    <!-- Popup para eliminar registros -->
+                    <!-- Popup to delete records -->
                     <div class="modal-overlay eliminar" *ngIf="popupEliminarVisible">
                         <div class="modal">
                             <div class="modal-header">
@@ -50,11 +44,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="msj-eliminar">
-                                    <p>¿Estás seguro de que deseas eliminar este registro?</p>
+                                    <p>¿Estás seguro de que deseas eliminar este pago?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn-cancelar" (click)="cerrarEliminarPopup()">Cancelar</button>
-                                    <button class="btn-eliminar" (click)="eliminar(productos[indiceProductoAEliminar])">Eliminar</button>
+                                    <button class="btn-eliminar" (click)="eliminar(pagos[indicePagoAEliminar].id)">Eliminar</button>
                                 </div>
                             </div>
                         </div>

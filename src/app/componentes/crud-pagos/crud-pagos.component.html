@@ -1,0 +1,27 @@
+
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formularioPago" (ngSubmit)="guardar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="metodoNombre">* Método de Pago:</label>
+                    <input type="text" class="form-control" id="metodoNombre" formControlName="metodoNombre" required>
+                    <!-- Mensajes de validaciones para el formulario -->
+                    <div *ngIf="formularioPago.get('metodoNombre')?.invalid && (formularioPago.get('metodoNombre')?.dirty || formularioPago.get('metodoNombre')?.touched)">
+                        <div *ngIf="formularioPago.get('metodoNombre')?.hasError('required')"><p>El nombre del método de pago es obligatorio.</p></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" routerLink="/dashboard-pagos">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formularioPago.invalid && enviado">
+                    <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

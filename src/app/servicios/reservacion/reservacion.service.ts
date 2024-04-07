@@ -7,31 +7,27 @@ import { Observable } from 'rxjs';
 })
 export class ReservacionService {
 
-  private URL = "http://localhost:8080/apiP/reservaciones";
+  private URL = "http://localhost:8080/reservaciones";
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllReservations(): Observable<any> {
-    return this.httpClient.get(this.URL);
+  public listarReservaciones(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.URL}/lista`);
   }
 
-  public getReservation(idReservacion: any): Observable<any> {
-    return this.httpClient.get(this.URL + "/" + idReservacion);
+  public obtenerReservacionPorId(id: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detalle/${id}`);
   }
 
-  public createReservation(reservation: any): Observable<any> {
-    return this.httpClient.post(this.URL, reservation);
+  public crearReservacionComoAdmin(reservacion: any): Observable<any> {
+    return this.httpClient.post(`${this.URL}/crearadmin`, reservacion);
   }
 
-  public deleteReservation(idReservacion: any): Observable<any> {
-    return this.httpClient.delete(this.URL + "/" + idReservacion);
+  public actualizarReservacion(reservacion: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/actualizar/${reservacion.id}`, reservacion);
   }
 
-  public updateReservation(idReservacion: any, reservation: any) {
-    return this.httpClient.put(this.URL + "/" + idReservacion, reservation);
-  }
-
-  public guardarFecha(reservation: any): Observable<any> {
-    return this.httpClient.post(this.URL, reservation);
+  public eliminarReservacion(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/eliminar/${id}`);
   }
 }

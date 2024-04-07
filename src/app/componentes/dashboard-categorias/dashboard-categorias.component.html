@@ -6,36 +6,30 @@
         <div class="card">
             <div class="card-body">
                 <div class="container-dash">
-                    <!-- Sección del dashboard para administrar reservaciones -->
+                    <!-- Sección del dashboard para administrar categorías -->
                     <div>
                         <div class="title-container">
-                            <h2>Administrar reservaciones</h2>
-                            <button routerLink="/crud-reservaciones">Agregar reservación</button>
+                            <h2>Administrar categorías</h2>
+                            <button routerLink="/crud-categorias">Agregar categoría</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Id Reservación</th>
-                                    <th>Fecha</th>
-                                    <th>Hora Inicio</th>
-                                    <th>Hora Fin</th>
-                                    <th>Id Usuario</th>
-                                    <th>Id Servicio</th>
+                                    <th>ID de Categoría</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
                                     <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Filas de la tabla con las reservaciones -->
-                                <tr *ngFor="let r of reservaciones; let i = index">
-                                    <td>{{ r?.id }}</td>
-                                    <td>{{ r?.fechaReserva }}</td>
-                                    <td>{{ r?.horaInicio }}</td>
-                                    <td>{{ r?.horaFin }}</td>
-                                    <td>{{ r?.usuario?.nombre }}</td>
-                                    <td>{{ r?.servicio?.nombre }}</td>
+                                <!-- Filas de la tabla con las categorías -->
+                                <tr *ngFor="let c of categorias; let i = index">
+                                    <td>{{ c?.id }}</td>
+                                    <td>{{ c?.nombre }}</td>
+                                    <td>{{ c?.descripcion }}</td>
                                     <td>
-                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-reservacion/', r.id]"></i>
-                                        <i class="far fa-trash-alt fa-lg text-danger" (click)="abrirEliminarPopup(i)"></i>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-categoria/', c.id]" (click)="mostrarId(c.id)"></i>
+                                        <i (click)="abrirEliminarPopup(i)" class="far fa-trash-alt fa-lg text-danger"></i>
                                     </td>
                                 </tr>
                             </tbody>
@@ -50,11 +44,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="msj-eliminar">
-                                    <p>¿Estás seguro de que deseas eliminar esta reservación?</p>
+                                    <p>¿Estás seguro de que deseas eliminar esta categoría?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn-cancelar" (click)="cerrarEliminarPopup()">Cancelar</button>
-                                    <button class="btn-eliminar" (click)="eliminar(reservaciones[indiceReservacionAEliminar])">Eliminar</button>
+                                    <button class="btn-eliminar" (click)="eliminar(categorias[indiceCategoriaAEliminar])">Eliminar</button>
                                 </div>
                             </div>
                         </div>
