@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -9,33 +10,31 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  email: string;
+  password: string;
+  errorMessage: string;
 
-  email: String;
-  password: String;
-
-  constructor(private Titulo: Title, private router: Router) {
-
-    Titulo.setTitle("Login | Flack's Barber Shop")
-
+  constructor(private title: Title, private usuarioService: UsuarioService, private router: Router) {
+    this.title.setTitle("Login | Flack's Barber Shop");
     this.email = '';
     this.password = '';
-
+    this.errorMessage = '';
   }
 
-  //Método para el inicio de sesión
   iniciaSesion() {
-    if (this.email === '20223l001025@utcv.edu.mx' && this.password === '12345678') {
-      console.log('Inicio sesión exitoso');
-      //Credenciales guardadas en el localStorage
-      localStorage.setItem('email', this.email.toString());
-    localStorage.setItem('password', this.password.toString());
-      this.router.navigate(['/dashboard-usuarios']);
-      return true;
-    } else {
-      console.log('Inicio de sesión fallido');
-      return false;
-    }
+    this.usuarioService.login({ email: this.email, password: this.password }).subscribe(
+      (response: any) => {
+        console.log('Inicio de sesión exitoso');
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('authorities', JSON.stringify(response.authorities)); // Almacena las autoridades
+        console.log('Token guardado:', response.token); // Agregado console.log para verificar el token
+        localStorage.setItem('usuario', JSON.stringify(response));
+        this.router.navigate(['/dashboard-usuarios']);
+      },
+      (error) => {
+        console.log('Inicio de sesión fallido:', error.error.message);
+        this.errorMessage = error.error.message;
+      }
+    );
   }
-
 }
-

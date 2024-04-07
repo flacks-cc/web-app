@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,27 +7,31 @@ import { Observable } from 'rxjs';
 })
 export class ServicioService {
 
-  private URL = "http://localhost:8080/apiP/servicios";
+  private URL = "http://localhost:8080/servicio";
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllServices(): Observable<any> {
-    return this.httpClient.get(this.URL);
+  public listarServicios(): Observable<any> {
+    return this.httpClient.get(`${this.URL}/lista`);
   }
 
-  public getService(idServicio: any): Observable<any> {
-    return this.httpClient.get(this.URL + "/" + idServicio);
+  public obtenerServicioPorId(id: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detail/${id}`);
   }
 
-  public createService(service: any): Observable<any> {
-    return this.httpClient.post(this.URL, service);
+  public eliminarServicio(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/delete/${id}`);
   }
 
-  public deleteService(idServicio: any): Observable<any> {
-    return this.httpClient.delete(this.URL + "/" + idServicio);
+  public crearServicio(servicio: any): Observable<any> {
+    return this.httpClient.post(`${this.URL}/create`, servicio);
   }
 
-  public updateService(idServicio: any, service: any) {
-    return this.httpClient.put(this.URL + "/" + idServicio, service);
+  public actualizarServicio(id: number, servicio: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/update/${id}`, servicio);
+  }
+
+  public obtenerServicioPorNombre(nombre: string): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detailname/${nombre}`);
   }
 }

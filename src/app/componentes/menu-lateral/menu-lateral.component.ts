@@ -132,10 +132,13 @@ export class MenuLateralComponent implements OnInit {
     this.popupCerrarVisible = false;
   }
 
-  // Método para cerrar la sesión
-    cierraSesion() {
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    this.router.navigate(['/menu']);
-  }
+// Método para cerrar la sesión
+cierraSesion() {
+  // Eliminar el token del almacenamiento local
+  localStorage.removeItem('token');
+  // Mostrar un mensaje en la consola para verificar que el token se ha eliminado
+  console.log('Token eliminado del almacenamiento local.');
+  // Redirigir al usuario a la página de inicio de sesión
+  this.router.navigate(['/login']);
+}
 }

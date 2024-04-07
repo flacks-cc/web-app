@@ -7,28 +7,33 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  private URL = "http://localhost:8080/apiP/usuarios";
+  private URL = "http://localhost:8080/auth";
 
+  
   constructor(private httpClient: HttpClient) { }
 
-  public getAllUsers(): Observable<any> {
-    return this.httpClient.get(this.URL);
+  public login(credentials: any): Observable<any> {
+    return this.httpClient.post(this.URL + "/login", credentials);
   }
 
-  public getUser(idUsuario: any): Observable<any> {
-    return this.httpClient.get(this.URL + "/" + idUsuario);
+  public register(newUser: any): Observable<any> {
+    return this.httpClient.post(this.URL + "/nuevo", newUser);
   }
 
-  public createUser(user: any): Observable<any> {
-    return this.httpClient.post(this.URL, user);
+
+  public actualizarUsuario(id: number, user: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/usuarios/${id}`, user);
   }
 
-  public deleteUser(idUsuario: any): Observable<any> {
-    return this.httpClient.delete(this.URL + "/" + idUsuario);
+  public borrarUsuario(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/usuarios/${id}`);
   }
 
-  public updateUser(idUsuario: any, user: any) {
-    return this.httpClient.put(this.URL + "/" + idUsuario, user);
+  public listarUsuarios(): Observable<any> {
+    return this.httpClient.get(`${this.URL}/usuarios`);
   }
 
+  public obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/usuarios/${id}`);
+  }
 }

@@ -1,13 +1,11 @@
 <div class="main-container" id="main">
-
-    <!-- Llamamos al component menu lateral para que aparezca nuestra sidebar -->
+    <!-- Llamamos al componente del menú lateral -->
     <app-menu-lateral></app-menu-lateral>
 
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
                 <div class="container-dash">
-
                     <!-- Sección del dashboard para administrar servicios -->
                     <div>
                         <div class="title-container">
@@ -20,21 +18,21 @@
                                     <th hidden>Id</th>
                                     <th>Nombre del servicio</th>
                                     <th>Descripción</th>
-                                    <th>Duración</th>
                                     <th>Precio</th>
-                                    <th></th> <!-- Acciones CRUD -->
+                                    <th>Duración</th>
+                                    <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Filas de la tabla con los servicios -->
                                 <tr *ngFor="let s of servicios; let i = index">
-                                    <td hidden>{{ s.idServicio }}</td>
-                                    <td>{{ s.nombreServicio }}</td>
-                                    <td>{{ s.descripcion }}</td>
-                                    <td>{{ s.duracion }} minutos</td>
-                                    <td>${{ s.precio }} MXN</td>
+                                    <td hidden>{{ s?.id }}</td>
+                                    <td>{{ s?.nombre }}</td>
+                                    <td>{{ s?.descripcion }}</td>
+                                    <td>{{ s?.precio }}</td>
+                                    <td>{{ s?.duracion }}</td>
                                     <td>
-                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-servicio/', s.idServicio]"></i>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-servicio/', s.id]" (click)="mostrarId(s.id)"></i>
                                         <i (click)="abrirEliminarPopup(i)" class="far fa-trash-alt fa-lg text-danger"></i>
                                     </td>
                                 </tr>
@@ -59,7 +57,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

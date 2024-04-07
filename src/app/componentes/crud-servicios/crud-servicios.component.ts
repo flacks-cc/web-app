@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicioService } from 'src/app/servicios/servicio/servicio.service';
-import { noCero, noDecimales, noNegativos } from 'src/app/validaciones/validaciones';
 
 @Component({
   selector: 'app-crud-servicios',
@@ -12,84 +11,73 @@ import { noCero, noDecimales, noNegativos } from 'src/app/validaciones/validacio
 export class CrudServiciosComponent implements OnInit {
 
   titulo = 'Agregar servicio';
-  submitted = false;
-  formServicio: FormGroup;
-  idServicio: any | null;
+  enviado = false;
+  formularioServicio: FormGroup;
+  id: number | null = null;
 
-  constructor(public fb: FormBuilder,
-              public servicioService: ServicioService,
-              private router: Router,
-              private aRoute: ActivatedRoute) {
-    this.formServicio = this.fb.group({
-      nombreServicio: ['', Validators.required],
+  constructor(
+    public fb: FormBuilder,
+    public servicioService: ServicioService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.formularioServicio = this.fb.group({
+      nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      duracion: ['', [Validators.required, noNegativos, noDecimales, noCero]],
-      precio: ['', [Validators.required, noNegativos, noDecimales, noCero]]
+      precio: ['', [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')]], // Patrón para precio con máximo de 2 decimales
+      duracion: ['', Validators.required]
     });
-
-    this.idServicio = this.aRoute.snapshot.paramMap.get('idServicio');
   }
 
   ngOnInit(): void {
-    this.esEditar();
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.id = +params['id'];
+        console.log('Se abrió la página para actualizar el servicio con ID:', this.id);
+        this.esEditar();
+      } else {
+        console.log('Se abrió la página para agregar un nuevo servicio.');
+      }
+    });
   }
 
-  esEditar() {
-    if (this.idServicio !== null) {
+  esEditar(): void {
+    if (this.id !== null) {
       this.titulo = 'Editar servicio';
-      this.servicioService.getService(this.idServicio).subscribe(response => {
-
-        this.formServicio.setValue({
-          nombreServicio: response.nombreServicio,
-          descripcion: response.descripcion,
-          duracion: response.duracion,
-          precio: response.precio
-        });
+      this.servicioService.obtenerServicioPorId(this.id).subscribe(response => {
+        this.formularioServicio.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos del servicio
       });
     }
   }
 
-  editar(idServicio: any): void {
-    const servicio: any = {
-      nombreServicio: this.formServicio.value.nombreServicio,
-      descripcion: this.formServicio.value.descripcion,
-      duracion: this.formServicio.value.duracion,
-      precio: this.formServicio.value.precio
-    };
-
-    this.servicioService.updateService(idServicio, servicio).subscribe(response => {
-      this.router.navigate(['dashboard-servicios']);
-    },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-
-  agregar(): void {
-    this.servicioService.createService(this.formServicio.value).subscribe(response => {
-      this.router.navigate(['dashboard-servicios']);
-    },
-      error => {
-        console.error(error);
-      }
-    );
-  }
-
-  agregarOEditar(): void {
-
-    // Marcar todos los controles como "touched" para que las validaciones se activen
-    this.formServicio.markAllAsTouched();
-
-    // Valida que todos los campos del formulario sean correctos
-    this.submitted = true;
-    if (this.formServicio.invalid) {
+  guardar(): void {
+    this.enviado = true;
+    if (this.formularioServicio.invalid) {
       return;
     }
 
-    if (this.idServicio === null)
+    if (this.id === null) {
       this.agregar();
-    else
-      this.editar(this.idServicio);
+    } else {
+      this.editar(this.id);
+    }
+  }
+
+  editar(idServicio: number): void {
+    const servicio = this.formularioServicio.value;
+    this.servicioService.actualizarServicio(idServicio, servicio).subscribe(response => {
+      this.router.navigate(['dashboard-servicios']);
+    }, error => {
+      console.error('Error al actualizar el servicio:', error);
+    });
+  }
+  
+  agregar(): void {
+    const servicio = this.formularioServicio.value;
+    this.servicioService.crearServicio(servicio).subscribe(response => {
+      this.router.navigate(['dashboard-servicios']);
+    }, error => {
+      console.error('Error al agregar el servicio:', error);
+    });
   }
 }

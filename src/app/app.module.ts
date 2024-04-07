@@ -16,7 +16,7 @@ import { DashboardUsuariosComponent } from './componentes/dashboard-usuarios/das
 import { CrudUsuariosComponent } from './componentes/crud-usuarios/crud-usuarios.component';
 import { MenuLateralComponent } from './componentes/menu-lateral/menu-lateral.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardEmpleadosComponent } from './componentes/dashboard-empleados/dashboard-empleados.component';
 import { DashboardClientesComponent } from './componentes/dashboard-clientes/dashboard-clientes.component';
 import { CrudClientesComponent } from './componentes/crud-clientes/crud-clientes.component';
@@ -27,6 +27,8 @@ import { CrudProductosComponent } from './componentes/crud-productos/crud-produc
 import { CrudEmpleadosComponent } from './componentes/crud-empleados/crud-empleados.component';
 import { DashboardReservacionesComponent } from './componentes/dashboard-reservaciones/dashboard-reservaciones.component';
 import { CrudReservacionesComponent } from './componentes/crud-reservaciones/crud-reservaciones.component';
+import { NuevoComponent } from './componentes/nuevo/nuevo.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { CrudReservacionesComponent } from './componentes/crud-reservaciones/cru
     CrudProductosComponent,
     DashboardReservacionesComponent,
     CrudReservacionesComponent,
+    NuevoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,10 @@ import { CrudReservacionesComponent } from './componentes/crud-reservaciones/cru
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
