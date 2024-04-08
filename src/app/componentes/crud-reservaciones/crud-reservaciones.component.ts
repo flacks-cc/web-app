@@ -31,7 +31,6 @@ export class CrudReservacionesComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    // Lógica para editar una reservación existente
   }
 
   guardar(): void {

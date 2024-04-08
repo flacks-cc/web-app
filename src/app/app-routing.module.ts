@@ -26,6 +26,8 @@ import { DashboardResenasComponent } from './componentes/dashboard-resenas/dashb
 import { CrudResenasComponent } from './componentes/crud-resenas/crud-resenas.component';
 import { DashboardPagosComponent } from './componentes/dashboard-pagos/dashboard-pagos.component';
 import { CrudPagosComponent } from './componentes/crud-pagos/crud-pagos.component';
+import { DashboardContactosComponent } from './componentes/dashboard-contactos/dashboard-contactos.component';
+import { CrudContactosComponent } from './componentes/crud-contactos/crud-contactos.component';
 
 
 const routes: Routes = [
@@ -161,6 +163,18 @@ const routes: Routes = [
   {
     path: 'editar-reservacion/:id',
     component: CrudReservacionesComponent,
+  },
+  {
+    path: 'dashboard-contactos',
+    component: DashboardContactosComponent,
+  },
+  {
+    path: 'crud-contactos',
+    component: CrudContactosComponent,
+  },
+  {
+    path: 'editar-contacto/:id',
+    component: CrudContactosComponent,
   },
   {
     path: 'dashboard-pagos',

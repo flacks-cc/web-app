@@ -6,37 +6,34 @@
         <div class="card">
             <div class="card-body">
                 <div class="container-dash">
-                    <!-- Sección del dashboard para administrar reseñas -->
+                    <!-- Sección del dashboard para administrar contactos -->
                     <div>
                         <div class="title-container">
-                            <h2>Administrar reseñas</h2>
-                            <button routerLink="/crud-resenas">Agregar reseña</button>
+                            <h2>Administrar mensajes de contactos</h2>
+                            <button routerLink="/crud-contactos">Agregar mensaje de contacto</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID Reseña</th>
+                                    <th>ID Mensaje</th>
+                                    <th>Asunto</th>
                                     <th>Mensaje</th>
-                                    <th>Valoración</th>
-                                    <th>Fecha y Hora</th>
-                                    <th>Id Usuario</th>
-                                    <th>Id Servicio</th>
-                                    <th>Id Producto</th>
+                                    <th>Fecha del mensaje</th>
+                                    <th>ID Usuario</th>
                                     <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Filas de la tabla con las reseñas -->
-                                <tr *ngFor="let r of resenas; let i = index">
-                                    <td>{{ r?.id }}</td>
-                                    <td>{{ r?.mensaje }}</td>
-                                    <td>{{ r?.valoracion }}</td>
-                                    <td>{{ r?.fechaResena }}</td>
-                                    <td>{{ r?.usuario?.nombre }}</td>
-                                    <td>{{ r?.servicio?.nombre }}</td>
-                                    <td>{{ r?.producto?.nombre }}</td>
+                                <!-- Filas de la tabla con los contactos -->
+                                <tr *ngFor="let c of contactos; let i = index">
+                                    <td>{{ c?.id }}</td>
+                                    <td>{{ c?.asunto }}</td>
+                                    <td>{{ c?.mensaje }}</td>
+                                    <td>{{ c?.fechaMensaje }}</td>
+                                    <!-- Mostrar el nombre del usuario -->
+                                    <td>{{ c?.usuario?.nombre }}</td>
                                     <td>
-                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-resena/', r.id]"></i>
+                                        <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-contacto/', c.id]"></i>
                                         <i class="far fa-trash-alt fa-lg text-danger" (click)="abrirEliminarPopup(i)"></i>
                                     </td>
                                 </tr>
@@ -52,11 +49,11 @@
                             </div>
                             <div class="modal-body">
                                 <div class="msj-eliminar">
-                                    <p>¿Estás seguro de que deseas eliminar esta reseña?</p>
+                                    <p>¿Estás seguro de que deseas eliminar este registro?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn-cancelar" (click)="cerrarEliminarPopup()">Cancelar</button>
-                                    <button class="btn-eliminar" (click)="eliminar(resenas[indiceResenaAEliminar])">Eliminar</button>
+                                    <button class="btn-eliminar" (click)="eliminar(contactos[indiceContactoAEliminar])">Eliminar</button>
                                 </div>
                             </div>
                         </div>

@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard-servicios.component.html',
   styleUrls: ['./dashboard-servicios.component.css']
 })
-export class DashboardServiciosComponent implements OnInit {
 
+export class DashboardServiciosComponent implements OnInit {
   popupEliminarVisible: boolean = false;
   servicios: any[] = [];
   indiceServicioAEliminar: number = -1;
