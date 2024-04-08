@@ -9,33 +9,36 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
   styleUrls: ['./nuevo.component.css']
 })
 export class NuevoComponent implements OnInit {
-  formularioUsuario: FormGroup;
+
+  uniqueError: string | null = null;
+  submitted = false;
+  formUsuario: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router
   ) {
-    this.formularioUsuario = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidoPaterno: ['', Validators.required],
-      apellidoMaterno: [''],
-      telefono: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]],
+    this.formUsuario = this.fb.group({
+      nombre: ['', [Validators.required, Validators.pattern('^[A-ZÑa-zñáéíóúÁÉÍÓÚüÜ\s\'\-]+$')]],
+      apellidoPaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
+      apellidoMaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
       nombreUsuario: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      telefono: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   registrarNuevoUsuario(): void {
-    if (this.formularioUsuario.invalid) {
+    if (this.formUsuario.invalid) {
       console.error('Formulario inválido');
       return;
     }
-  
-    this.usuarioService.register(this.formularioUsuario.value).subscribe(
+
+    this.usuarioService.register(this.formUsuario.value).subscribe(
       (response) => {
         console.log('Usuario registrado exitosamente:', response);
         // Mostrar alerta de registro exitoso

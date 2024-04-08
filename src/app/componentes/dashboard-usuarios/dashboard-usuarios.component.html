@@ -15,27 +15,30 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Id Usuario</th>
+                                    <th hidden>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
                                     <th>Nombre de usuario</th>
                                     <th>Correo electrónico</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
                                     <th hidden>Contraseña</th>
                                     <th>Número de teléfono</th>
-                                    <!-- Acciones CRUD -->
+                                    <th>Rol</th>
+                                    <th></th> <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Filas de la tabla con los usuarios -->
                                 <tr *ngFor="let u of usuarios; let i = index">
-                                    <td>{{ u?.id }}</td>
-                                    <td>{{ u?.nombreUsuario }}</td>
-                                    <td>{{ u?.email }}</td>
+                                    <td hidden>{{ u?.id }}</td>
+                                    <td>{{ u?.nombre }}</td>
                                     <td>{{ u?.apellidoPaterno }}</td>
                                     <td>{{ u?.apellidoMaterno }}</td>
+                                    <td>{{ u?.nombreUsuario }}</td>
+                                    <td>{{ u?.email }}</td>
                                     <td hidden>{{ u?.password }}</td>
                                     <td>{{ u?.telefono }}</td>
-                                    <td hidden>{{ u?.roles }}</td>
+                                    <td>{{ getNombresRoles(u.roles) }}</td>
                                     <td>
                                         <i class="far fa-edit fa-lg text-info me-3" [routerLink]="['/editar-usuario/', u.id]" (click)="mostrarId(u.id)"></i>
                                         <i (click)="abrirEliminarPopup(i)" class="far fa-trash-alt fa-lg text-danger"></i>

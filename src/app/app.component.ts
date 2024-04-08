@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewInit {
   HideNavFooter(): boolean {
     // Secciones en donde se esta ocultando la barra de navegación y el pie de página
     return this.router.url === '/login' ||
+    this.router.url === '/nuevo'||
 
       this.router.url === '/dashboard-usuarios' ||
       this.router.url === '/crud-usuarios' ||

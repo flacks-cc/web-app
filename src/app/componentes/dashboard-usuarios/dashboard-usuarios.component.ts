@@ -33,8 +33,12 @@ export class DashboardUsuariosComponent implements OnInit {
   mostrarId(id: number) {
     console.log('Se ha hecho clic en el botón "Actualizar usuario"');
     console.log('El id del usuario seleccionado es:', id);
-}
+  }
 
+  // Método para mostrar los roles de los usuarios
+  getNombresRoles(roles: any[]): string {
+    return roles.map(rol => rol.rolNombre).join(', ');
+  }
 
 
   eliminar(usuario: any): void {
