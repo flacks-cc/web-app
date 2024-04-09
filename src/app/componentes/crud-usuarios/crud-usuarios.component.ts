@@ -11,9 +11,10 @@ import { UsuarioService } from 'src/app/servicios/usuario/usuario.service';
 export class CrudUsuariosComponent implements OnInit {
 
   titulo = 'Agregar usuario';
-  enviado = false;
+  submitted = false;
+  uniqueError: string | null = null;
   uniqueEmailError: string | null = null;
-  formularioUsuario: FormGroup;
+  formUsuario: FormGroup;
   id: number | null = null;
   uniquePhoneError: string | null = null;
   selectedRoles: string[] = [];
@@ -24,14 +25,14 @@ export class CrudUsuariosComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.formularioUsuario = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidoPaterno: ['', Validators.required],
-      apellidoMaterno: [''],
-      telefono: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]],
+    this.formUsuario = this.fb.group({
+      nombre: ['', [Validators.required, Validators.pattern('^[A-ZÑa-zñáéíóúÁÉÍÓÚüÜ\s\'\-]+$')]],
+      apellidoPaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
+      apellidoMaterno: ['', [Validators.required, Validators.pattern('^[A-Za-záéíóúÁÉÍÓÚüÜñÑ\s\'\-]+$')]],
       nombreUsuario: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      telefono: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]],
       roles: [[], [Validators.required, this.rolesSeleccionadosValidator]] // Agregamos la validación personalizada
     });
   }
@@ -63,26 +64,14 @@ export class CrudUsuariosComponent implements OnInit {
     if (this.id !== null) {
       this.titulo = 'Editar usuario';
       this.usuarioService.obtenerUsuarioPorId(this.id).subscribe(response => {
-        this.formularioUsuario.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos del usuario
+        this.formUsuario.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos del usuario
       });
     }
   }
 
-  guardar(): void {
-    this.enviado = true;
-    if (this.formularioUsuario.invalid) {
-      return;
-    }
-    if (this.id === null) {
-      this.agregar();
-    } else {
-      this.editar(this.id);
-    }
-}
-
-  
+    
   editar(idUsuario: number): void {
-    const usuario = this.formularioUsuario.value;
+    const usuario = this.formUsuario.value;
     this.usuarioService.actualizarUsuario(idUsuario, usuario).subscribe(response => {
       this.router.navigate(['dashboard-usuarios']);
     }, error => {
@@ -91,12 +80,35 @@ export class CrudUsuariosComponent implements OnInit {
   }
   
   agregar(): void {
-    const usuario = this.formularioUsuario.value;
-    this.usuarioService.register(usuario).subscribe(response => {
+    this.usuarioService.register(this.formUsuario.value).subscribe(response => {
       this.router.navigate(['dashboard-usuarios']);
-    }, error => {
-      console.error('Error al agregar el usuario:', error);
-    });
+    },
+      	error => {
+        if (error.error.message === 'Correo ya existe') {
+          this.uniqueError = 'El correo ingresado ya existe. Por favor, elige otro correo.';
+        } else {
+          console.error(error);
+        }
+      }
+    );
+  }
+
+
+  agregarOEditar(): void {
+
+    // Marcar todos los controles como "touched" para que las validaciones se activen
+    this.formUsuario.markAllAsTouched();
+
+    // Valida que todos los campos del formulario sean correctos
+    this.submitted = true;
+    if (this.formUsuario.invalid) {
+      return;
+    }
+
+    if (this.id === null)
+      this.agregar();
+    else
+      this.editar(this.id);
   }
   
   private handleErrors(error: any): void {

@@ -13,6 +13,12 @@ export class DashboardUsuariosComponent implements OnInit {
   usuarios: any[] = [];
   indiceUsuarioAEliminar: number = -1;
 
+  //Objeto que mapea los nombres de los roles
+  nombresRoles: { [key: string]: string } = {
+    'ROLE_ADMIN': 'Admin',
+    'ROLE_USER': 'Usuario'
+  };
+
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -33,8 +39,12 @@ export class DashboardUsuariosComponent implements OnInit {
   mostrarId(id: number) {
     console.log('Se ha hecho clic en el botón "Actualizar usuario"');
     console.log('El id del usuario seleccionado es:', id);
-}
+  }
 
+  // Método para mostrar los roles de los usuarios
+  getNombresRoles(roles: any[]): string {
+    return roles.map(rol => this.nombresRoles[rol.rolNombre] || rol.rolNombre).join(', ');
+  }
 
 
   eliminar(usuario: any): void {
