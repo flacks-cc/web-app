@@ -1,0 +1,58 @@
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ titulo }}</h5>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formularioTicket" (ngSubmit)="guardar()" autocomplete="off">
+                <div class="form-group">
+                    <label for="montoPagado">* Monto Pagado:</label>
+                    <input type="number" class="form-control" id="montoPagado" formControlName="montoPagado" required>
+                    <div *ngIf="formularioTicket.get('montoPagado')?.invalid && (formularioTicket.get('montoPagado')?.dirty || formularioTicket.get('montoPagado')?.touched)">
+                        <div *ngIf="formularioTicket.get('montoPagado')?.hasError('required')"><p>El monto pagado es obligatorio.</p></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombreEmpleado">* Nombre del Empleado:</label>
+                    <input type="text" class="form-control" id="nombreEmpleado" formControlName="nombreEmpleado" required>
+                    <div *ngIf="formularioTicket.get('nombreEmpleado')?.invalid && (formularioTicket.get('nombreEmpleado')?.dirty || formularioTicket.get('nombreEmpleado')?.touched)">
+                        <div *ngIf="formularioTicket.get('nombreEmpleado')?.hasError('required')"><p>El nombre del empleado es obligatorio.</p></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="idUsuario">* ID de Usuario:</label>
+                    <input type="number" class="form-control" id="idUsuario" formControlName="idUsuario" required>
+                    <div *ngIf="formularioTicket.get('idUsuario')?.invalid && (formularioTicket.get('idUsuario')?.dirty || formularioTicket.get('idUsuario')?.touched)">
+                        <div *ngIf="formularioTicket.get('idUsuario')?.hasError('required')"><p>El ID de usuario es obligatorio.</p></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="idMetodoPago">* ID de Método de Pago:</label>
+                    <input type="number" class="form-control" id="idMetodoPago" formControlName="idMetodoPago" required>
+                    <div *ngIf="formularioTicket.get('idMetodoPago')?.invalid && (formularioTicket.get('idMetodoPago')?.dirty || formularioTicket.get('idMetodoPago')?.touched)">
+                        <div *ngIf="formularioTicket.get('idMetodoPago')?.hasError('required')"><p>El ID de método de pago es obligatorio.</p></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="idDetalleGeneral">* ID de Detalle General:</label>
+                    <input type="number" class="form-control" id="idDetalleGeneral" formControlName="idDetalleGeneral" required>
+                    <div *ngIf="formularioTicket.get('idDetalleGeneral')?.invalid && (formularioTicket.get('idDetalleGeneral')?.dirty || formularioTicket.get('idDetalleGeneral')?.touched)">
+                        <div *ngIf="formularioTicket.get('idDetalleGeneral')?.hasError('required')"><p>El ID de detalle general es obligatorio.</p></div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" routerLink="/dashboard-tickets">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+                <div *ngIf="formularioTicket.invalid && enviado">
+                    <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

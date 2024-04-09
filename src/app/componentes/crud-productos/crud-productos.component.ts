@@ -24,13 +24,21 @@ export class CrudProductosComponent implements OnInit {
       nombre: ['', Validators.required],
       descripcion: [''],
       cantidadTotal: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      precio: ['', [Validators.required, Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
+      precio: ['', [Validators.required, Validators.pattern('[0-9]+(\.[0-9]{1,2})?')]], // Corregido el patrón de precio
       idCategoria: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Lógica para verificar si se está editando un producto y cargar sus datos si es así
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.id = +params['id'];
+        console.log('Se abrió la página para actualizar el producto con ID:', this.id);
+        this.esEditar();
+      } else {
+        console.log('Se abrió la página para agregar un nuevo producto.');
+      }
+    });
   }
 
   guardar(): void {
@@ -42,6 +50,15 @@ export class CrudProductosComponent implements OnInit {
       this.agregar();
     } else {
       this.editar(this.id);
+    }
+  }
+
+  esEditar(): void {
+    if (this.id !== null) {
+      this.titulo = 'Editar producto';
+      this.productoService.obtenerDetallePorId(this.id).subscribe(response => {
+        this.formularioProducto.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos del producto
+      });
     }
   }
 

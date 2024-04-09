@@ -28,6 +28,10 @@ import { DashboardPagosComponent } from './componentes/dashboard-pagos/dashboard
 import { CrudPagosComponent } from './componentes/crud-pagos/crud-pagos.component';
 import { DashboardContactosComponent } from './componentes/dashboard-contactos/dashboard-contactos.component';
 import { CrudContactosComponent } from './componentes/crud-contactos/crud-contactos.component';
+import { DashboardDetallesComponent } from './componentes/dashboard-detalles/dashboard-detalles.component';
+import { CrudDetallesComponent } from './componentes/crud-detalles/crud-detalles.component';
+import { DashboardTicketsComponent } from './componentes/dashboard-tickets/dashboard-tickets.component';
+import { CrudTicketsComponent } from './componentes/crud-tickets/crud-tickets.component';
 
 
 const routes: Routes = [
@@ -187,6 +191,30 @@ const routes: Routes = [
   {
     path: 'editar-pago/:id',
     component: CrudPagosComponent,
+  },
+  {
+    path: 'dashboard-detalles',
+    component: DashboardDetallesComponent,
+  },
+  {
+    path: 'crud-detalles',
+    component: CrudDetallesComponent,
+  },
+  {
+    path: 'editar-detalle/:id',
+    component: CrudDetallesComponent,
+  },
+  {
+    path: 'dashboard-tickets',
+    component: DashboardTicketsComponent,
+  },
+  {
+    path: 'crud-tickets',
+    component: CrudTicketsComponent,
+  },
+  {
+    path: 'editar-ticket/:id',
+    component: CrudTicketsComponent,
   },
   {
     path: '',

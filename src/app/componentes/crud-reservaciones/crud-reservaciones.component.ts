@@ -24,13 +24,21 @@ export class CrudReservacionesComponent implements OnInit {
     this.formularioReservacion = this.fb.group({
       fechaReserva: ['', Validators.required],
       horaInicio: ['', Validators.required],
-      horaFin: ['', Validators.required],
       idUsuario: ['', Validators.required],
       idServicio: ['', Validators.required]
     });
   }
   
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.id = +params['id'];
+        console.log('Se abrió la página para actualizar la reservación con ID:', this.id);
+        this.esEditar();
+      } else {
+        console.log('Se abrió la página para agregar una nueva reservación.');
+      }
+    });
   }
 
   guardar(): void {
@@ -42,6 +50,15 @@ export class CrudReservacionesComponent implements OnInit {
       this.agregar();
     } else {
       this.editar(this.id);
+    }
+  }
+
+  esEditar(): void {
+    if (this.id !== null) {
+      this.titulo = 'Editar reservación';
+      this.reservacionService.obtenerReservacionPorId(this.id).subscribe(response => {
+        this.formularioReservacion.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos de la reservación
+      });
     }
   }
 

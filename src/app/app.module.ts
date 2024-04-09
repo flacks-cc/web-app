@@ -37,6 +37,10 @@ import { DashboardPagosComponent } from './componentes/dashboard-pagos/dashboard
 import { CrudPagosComponent } from './componentes/crud-pagos/crud-pagos.component';
 import { DashboardContactosComponent } from './componentes/dashboard-contactos/dashboard-contactos.component';
 import { CrudContactosComponent } from './componentes/crud-contactos/crud-contactos.component';
+import { CrudDetallesComponent } from './componentes/crud-detalles/crud-detalles.component';
+import { DashboardDetallesComponent } from './componentes/dashboard-detalles/dashboard-detalles.component';
+import { CrudTicketsComponent } from './componentes/crud-tickets/crud-tickets.component';
+import { DashboardTicketsComponent } from './componentes/dashboard-tickets/dashboard-tickets.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +76,10 @@ import { CrudContactosComponent } from './componentes/crud-contactos/crud-contac
     CrudPagosComponent,
     DashboardContactosComponent,
     CrudContactosComponent,
+    CrudDetallesComponent,
+    DashboardDetallesComponent,
+    CrudTicketsComponent,
+    DashboardTicketsComponent,
   ],
   imports: [
     BrowserModule,

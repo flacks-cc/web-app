@@ -23,16 +23,23 @@ export class CrudResenasComponent implements OnInit {
   ) {
     this.formularioResena = this.fb.group({
       mensaje: ['', Validators.required],
-      valoracion: ['', Validators.required],
+      valoracion: ['', [Validators.required, Validators.min(1), Validators.max(5)]], // Añadida validación para valoración entre 1 y 5
       idUsuario: ['', Validators.required],
       idServicio: ['', Validators.required],
       idProducto: ['', Validators.required]
-      // Aquí podrías agregar más campos según tus necesidades y aplicar las validaciones correspondientes
     });
   }
   
   ngOnInit(): void {
-    // Aquí podrías incluir la lógica para editar una reseña si se proporciona un ID en la URL
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        this.id = +params['id'];
+        console.log('Se abrió la página para actualizar la reseña con ID:', this.id);
+        this.esEditar();
+      } else {
+        console.log('Se abrió la página para agregar una nueva reseña.');
+      }
+    });
   }
 
   guardar(): void {
@@ -44,6 +51,15 @@ export class CrudResenasComponent implements OnInit {
       this.agregar();
     } else {
       this.editar(this.id);
+    }
+  }
+
+  esEditar(): void {
+    if (this.id !== null) {
+      this.titulo = 'Editar reseña';
+      this.resenaService.obtenerResenaPorId(this.id).subscribe(response => {
+        this.formularioResena.patchValue(response); 
+      });
     }
   }
 

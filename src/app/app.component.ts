@@ -63,6 +63,14 @@ export class AppComponent implements AfterViewInit {
       this.router.url === '/crud-contactos' ||
       this.router.url.startsWith('/editar-contacto/')||
 
+      this.router.url === '/dashboard-detalles' ||
+      this.router.url === '/crud-detalles' ||
+      this.router.url.startsWith('/editar-detalle/')||
+
+      this.router.url === '/dashboard-tickets' ||
+      this.router.url === '/crud-tickets' ||
+      this.router.url.startsWith('/editar-ticket/')||
+
       this.router.url === '/dashboard-productos' ||
       this.router.url === '/crud-productos' ||
       this.router.url.startsWith('/editar-producto/');
