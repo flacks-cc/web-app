@@ -41,7 +41,6 @@ export class CrudPagosComponent implements OnInit {
   esEditar(): void {
     if (this.id !== null) {
       this.titulo = 'Editar Método de Pago';
-      // Aquí puedes implementar la lógica para obtener los datos del método de pago por su ID y llenar el formulario
     }
   }
 

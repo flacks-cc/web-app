@@ -23,11 +23,10 @@ export class CrudResenasComponent implements OnInit {
   ) {
     this.formResena = this.fb.group({
       mensaje: ['', Validators.required],
-      valoracion: ['', Validators.required],
+      valoracion: ['', [Validators.required, Validators.min(1), Validators.max(5)]], // Añadida validación para valoración entre 1 y 5
       idUsuario: ['', Validators.required],
       idServicio: ['', Validators.required],
       idProducto: ['', Validators.required]
-      // Aquí podrías agregar más campos según tus necesidades y aplicar las validaciones correspondientes
     });
   }
 

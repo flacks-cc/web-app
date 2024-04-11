@@ -25,7 +25,6 @@ export class DashboardPagosComponent implements OnInit {
       },
       (error) => {
         console.error('Error al cargar los pagos:', error);
-        // Aquí puedes manejar el error de forma más específica, por ejemplo, mostrando un mensaje al usuario
       }
     );
   }
@@ -45,10 +44,11 @@ export class DashboardPagosComponent implements OnInit {
             this.pagos = this.pagos.filter(pago => pago.id !== id);
           }
           this.cerrarEliminarPopup();
+          this.loadPagos();
+
         },
         (error) => {
           console.error('Error al eliminar el pago:', error);
-          // Aquí también puedes manejar el error de forma específica
         }
       );
     } else {

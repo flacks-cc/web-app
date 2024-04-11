@@ -24,7 +24,6 @@ export class CrudReservacionesComponent implements OnInit {
     this.formReservacion = this.fb.group({
       fechaReserva: ['', Validators.required],
       horaInicio: ['', Validators.required],
-      horaFin: ['', Validators.required],
       idUsuario: ['', Validators.required],
       idServicio: ['', Validators.required]
     });

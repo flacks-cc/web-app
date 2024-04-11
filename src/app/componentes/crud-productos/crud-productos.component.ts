@@ -54,6 +54,15 @@ export class CrudProductosComponent implements OnInit {
     });
   }
 
+  esEditar(): void {
+    if (this.id !== null) {
+      this.titulo = 'Editar producto';
+      this.productoService.obtenerDetallePorId(this.id).subscribe(response => {
+        this.formularioProducto.patchValue(response); // Utiliza patchValue para llenar el formulario con los datos del producto
+      });
+    }
+  }
+
   agregar(): void {
     const producto = this.formProducto.value;
     this.productoService.createProduct(producto).subscribe(response => {

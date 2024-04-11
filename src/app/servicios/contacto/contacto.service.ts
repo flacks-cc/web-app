@@ -23,10 +23,10 @@ export class ContactoService {
     return this.httpClient.post(`${this.URL}/crearadmin`, contacto);
   }
 
-  public actualizarContacto(contacto: any): Observable<any> {
-    return this.httpClient.put(`${this.URL}/actualizar/${contacto.id}`, contacto);
-  }
-
+  public actualizarContacto(id: number, contacto: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/actualizar/${id}`, contacto);
+  }  
+  
   public eliminarContacto(id: number): Observable<any> {
     return this.httpClient.delete(`${this.URL}/eliminar/${id}`);
   }
