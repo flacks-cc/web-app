@@ -4,33 +4,33 @@
             <h5 class="modal-title">{{ titulo }}</h5>
         </div>
         <div class="modal-body">
-            <form [formGroup]="formularioResena" (ngSubmit)="guardar()" autocomplete="off">
+            <form [formGroup]="formResena" (ngSubmit)="agregarOEditar()" autocomplete="off">
                 <div class="form-group">
-                    <label for="mensaje">* Mensaje:</label>
+                    <label for="mensaje">Mensaje:</label>
                     <textarea class="form-control" id="mensaje" formControlName="mensaje" required></textarea>
-                    <div *ngIf="formularioResena.get('mensaje')?.invalid && (formularioResena.get('mensaje')?.dirty || formularioResena.get('mensaje')?.touched)">
-                        <div *ngIf="formularioResena.get('mensaje')?.hasError('required')"><p>El mensaje es obligatorio.</p></div>
+                    <div *ngIf="formResena.get('mensaje')?.invalid && (formResena.get('mensaje')?.dirty || formResena.get('mensaje')?.touched)">
+                        <div *ngIf="formResena.get('mensaje')?.hasError('required')"><p>El mensaje es obligatorio.</p></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="valoracion">* Valoración:</label>
+                    <label for="valoracion">Valoración:</label>
                     <input type="number" class="form-control" id="valoracion" formControlName="valoracion" required>
-                    <div *ngIf="formularioResena.get('valoracion')?.invalid && (formularioResena.get('valoracion')?.dirty || formularioResena.get('valoracion')?.touched)">
-                        <div *ngIf="formularioResena.get('valoracion')?.hasError('required')"><p>La valoración es obligatoria.</p></div>
+                    <div *ngIf="formResena.get('valoracion')?.invalid && (formResena.get('valoracion')?.dirty || formResena.get('valoracion')?.touched)">
+                        <div *ngIf="formResena.get('valoracion')?.hasError('required')"><p>La valoración es obligatoria.</p></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="idUsuario">* Id Usuario:</label>
+                    <label for="idUsuario">Usuario:</label>
                     <input type="number" class="form-control" id="idUsuario" formControlName="idUsuario" required>
                     <!-- Agregar mensajes de validación si es necesario -->
                 </div>
                 <div class="form-group">
-                    <label for="idServicio">* Id Servicio:</label>
+                    <label for="idServicio">Servicio:</label>
                     <input type="number" class="form-control" id="idServicio" formControlName="idServicio" required>
                     <!-- Agregar mensajes de validación si es necesario -->
                 </div>
                 <div class="form-group">
-                    <label for="idProducto">* Id Producto:</label>
+                    <label for="idProducto">Producto:</label>
                     <input type="number" class="form-control" id="idProducto" formControlName="idProducto" required>
                     <!-- Agregar mensajes de validación si es necesario -->
                 </div>
@@ -39,7 +39,7 @@
                     <button type="button" class="btn-cancelar" routerLink="/dashboard-resenas">Cancelar</button>
                     <button type="submit" class="btn-primary">Guardar</button>
                 </div>
-                <div *ngIf="formularioResena.invalid && enviado">
+                <div *ngIf="formResena.invalid && enviado">
                     <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
                 </div>
             </form>

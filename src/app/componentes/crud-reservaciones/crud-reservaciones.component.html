@@ -4,7 +4,7 @@
             <h5 class="modal-title">{{ titulo }}</h5>
         </div>
         <div class="modal-body">
-            <form [formGroup]="formularioReservacion" (ngSubmit)="guardar()" autocomplete="off">
+            <form [formGroup]="formularioReservacion" (ngSubmit)="agregarOEditar()" autocomplete="off">
                 <div class="form-group">
                     <label for="fechaReserva">* Fecha de Reserva:</label>
                     <input type="date" class="form-control" id="fechaReserva" formControlName="fechaReserva" required>
@@ -13,26 +13,26 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="horaInicio">* Hora de Inicio:</label>
+                    <label for="horaInicio">* Hora de inicio:</label>
                     <input type="time" class="form-control" id="horaInicio" formControlName="horaInicio" required>
                     <div *ngIf="formularioReservacion.get('horaInicio')?.invalid && (formularioReservacion.get('horaInicio')?.dirty || formularioReservacion.get('horaInicio')?.touched)">
                         <div *ngIf="formularioReservacion.get('horaInicio')?.hasError('required')"><p>La hora de inicio es obligatoria.</p></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="horaFin">* Hora de Fin:</label>
+                    <label for="horaFin">* Hora de fin:</label>
                     <input type="time" class="form-control" id="horaFin" formControlName="horaFin" required>
                     <div *ngIf="formularioReservacion.get('horaFin')?.invalid && (formularioReservacion.get('horaFin')?.dirty || formularioReservacion.get('horaFin')?.touched)">
                         <div *ngIf="formularioReservacion.get('horaFin')?.hasError('required')"><p>La hora de fin es obligatoria.</p></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="idUsuario">* ID de Usuario:</label>
+                    <label for="idUsuario">Usuario:</label>
                     <input type="number" class="form-control" id="idUsuario" formControlName="idUsuario" required>
                     <!-- Agregar mensajes de validación si es necesario -->
                 </div>
                 <div class="form-group">
-                    <label for="idServicio">* ID de Servicio:</label>
+                    <label for="idServicio">Servicio:</label>
                     <input type="number" class="form-control" id="idServicio" formControlName="idServicio" required>
                     <!-- Agregar mensajes de validación si es necesario -->
                 </div>
@@ -41,7 +41,7 @@
                     <button type="button" class="btn-cancelar" routerLink="/dashboard-reservaciones">Cancelar</button>
                     <button type="submit" class="btn-primary">Guardar</button>
                 </div>
-                <div *ngIf="formularioReservacion.invalid && enviado">
+                <div *ngIf="formularioReservacion.invalid && submitted">
                     <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
                 </div>
             </form>

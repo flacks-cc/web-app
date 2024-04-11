@@ -11,12 +11,19 @@ export class MenuLateralComponent implements OnInit {
   // Agregar una variable de estado para rastrear si estamos en modo responsivo o no
   isResponsiveMode: boolean = false;
   popupCerrarVisible: boolean = false;
+  ocultarScrollbar: boolean = false;
 
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
     // Llamar a la función onResize cuando se carga el componente
     this.onResize();
+  }
+
+
+  toggleScrollbar() {
+    console.log('Toggle Scrollbar function called');
+    this.ocultarScrollbar = !this.ocultarScrollbar;
   }
 
   // Lógica del menú desplegable

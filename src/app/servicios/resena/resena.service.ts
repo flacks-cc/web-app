@@ -7,19 +7,19 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class ResenaService {
 
-  private URL = "http://localhost:8080/resenas";
+  private URL = "http://localhost:8080/api/resenas";
 
   constructor(private httpClient: HttpClient) { }
 
-  public listarResenas(): Observable<any> {
+  public getAllReviews(): Observable<any> {
     return this.httpClient.get(`${this.URL}/lista`);
   }
 
-  public obtenerResenaPorId(id: number): Observable<any> {
-    return this.httpClient.get(`${this.URL}/detalle/${id}`);
+  public getReview(idResena: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detalle/${idResena}`);
   }
 
-  public crearResenaComoAdmin(resena: any): Observable<any> {
+  public createReview(resena: any): Observable<any> {
     return this.httpClient.post(`${this.URL}/crearadmin`, resena);
   }
 
@@ -27,12 +27,12 @@ export class ResenaService {
     return this.httpClient.post(`${this.URL}/crearusuario`, resena);
   }
 
-  public eliminarResena(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.URL}/eliminar/${id}`);
+  public deleteReview(idResena: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/eliminar/${idResena}`);
   }
 
-  public actualizarResena(id: number, resena: any): Observable<any> {
-    return this.httpClient.put(`${this.URL}/update/${id}`, resena);
+  public updateReview(idResena: number, resena: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/update/${idResena}`, resena);
   }
 
   public obtenerDetalles(idUsuario: number, idProducto: number, idServicio: number): Observable<any> {

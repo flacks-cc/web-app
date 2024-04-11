@@ -5,7 +5,7 @@
             <i class='bx bxs-user-circle'></i>
             <p>Administrador</p>
         </div>
-        <i class='bx bx-menu' id="menu" (click)="toggleAside()"></i>
+        <i class='bx bx-menu' id="menu" (click)="toggleAside(); toggleScrollbar()"></i>
 
         <!-- Popup para cerrar sesión -->
         <div class="modal-overlay eliminar" *ngIf="popupCerrarVisible">
@@ -26,42 +26,41 @@
         </div>
     </div>
 
-    <div class="options">
-        <div routerLink="/dashboard-usuarios">
-            <i class='bx bxs-user'></i>
-            <span class="option">Usuarios</span>
-        </div>
-        <div routerLink="/dashboard-productos">
-            <i class='bx bxs-purchase-tag-alt'></i>
-            <span class="option">Productos</span>
-        </div>
-        <div routerLink="/dashboard-servicios">
-            <i class='bx bx-cut'></i>
-            <span class="option">Servicios</span>
-        </div>
-        <div routerLink="/dashboard-reservaciones">
-            <i class='bx bxs-calendar'></i>
-            <span class="option">Reservaciones</span>
-        </div>
-        <div routerLink="/dashboard-categorias">
-            <i class='bx bxs-calendar'></i>
-            <span class="option">Categorias</span>
-        </div>
-        <div routerLink="/dashboard-resenas">
-            <i class='bx bxs-calendar'></i>
-            <span class="option">Reseñas</span>
-        </div>
-        <div routerLink="/dashboard-pagos">
-            <i class='bx bxs-calendar'></i>
-            <span class="option">Metodos de pago</span>
-        </div>
-        <div routerLink="/dashboard-contactos">
-            <i class='bx bxs-calendar'></i>
-            <span class="option">Contáctanos</span>
-        </div>
-        <div class="logout">
-            <i class='bx bxs-log-out'></i>
-            <span class="option" (click)="abrirCerrarPopup()">Cerrar sesión</span>
+    <div class="options-container" id="options-container" [ngClass]="{'hide-scrollbar': ocultarScrollbar}">
+        <div class="options">
+            <div routerLink="/dashboard-usuarios">
+                <i class='bx bxs-user'></i>
+                <span class="option">Usuarios</span>
+            </div>
+            <div routerLink="/dashboard-productos">
+                <i class='bx bxs-purchase-tag-alt'></i>
+                <span class="option">Productos</span>
+            </div>
+            <div routerLink="/dashboard-servicios">
+                <i class='bx bx-cut'></i>
+                <span class="option">Servicios</span>
+            </div>
+            <div routerLink="/dashboard-reservaciones">
+                <i class='bx bxs-calendar'></i>
+                <span class="option">Reservaciones</span>
+            </div>
+            <div routerLink="/dashboard-resenas">
+                <i class='bx bxs-message-dots'></i>
+                <span class="option">Reseñas</span>
+            </div>
+            <div routerLink="/dashboard-pagos">
+                <i class='bx bx-credit-card'></i>
+                <span class="option">Métodos de pago</span>
+            </div>
+            <div routerLink="/dashboard-pagos">
+                <i class='bx bx-spreadsheet'></i>
+                <span class="option">Tickets</span>
+            </div>
+
+            <div class="logout">
+                <i class='bx bxs-log-out'></i>
+                <span class="option" (click)="abrirCerrarPopup()">Cerrar sesión</span>
+            </div>
         </div>
     </div>
 </aside>

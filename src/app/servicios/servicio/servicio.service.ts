@@ -7,31 +7,32 @@ import { Observable } from 'rxjs';
 })
 export class ServicioService {
 
-  private URL = "http://localhost:8080/servicio";
+  private URL = "http://localhost:8080/api/servicios";
 
   constructor(private httpClient: HttpClient) { }
 
-  public listarServicios(): Observable<any> {
+  public createService(service: any): Observable<any> {
+    return this.httpClient.post(`${this.URL}/create`, service);
+  }
+
+  public getAllServices(): Observable<any> {
     return this.httpClient.get(`${this.URL}/lista`);
   }
 
-  public obtenerServicioPorId(id: number): Observable<any> {
-    return this.httpClient.get(`${this.URL}/detail/${id}`);
-  }
-
-  public eliminarServicio(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.URL}/delete/${id}`);
-  }
-
-  public crearServicio(servicio: any): Observable<any> {
-    return this.httpClient.post(`${this.URL}/create`, servicio);
-  }
-
-  public actualizarServicio(id: number, servicio: any): Observable<any> {
-    return this.httpClient.put(`${this.URL}/update/${id}`, servicio);
+  public getService(idServicio: number): Observable<any> {
+    return this.httpClient.get(`${this.URL}/detail/${idServicio}`);
   }
 
   public obtenerServicioPorNombre(nombre: string): Observable<any> {
     return this.httpClient.get(`${this.URL}/detailname/${nombre}`);
+  }  
+
+  public updateService(idServicio: number, service: any): Observable<any> {
+    return this.httpClient.put(`${this.URL}/update/${idServicio}`, service);
   }
+
+  public deleteService(idServicio: number): Observable<any> {
+    return this.httpClient.delete(`${this.URL}/delete/${idServicio}`);
+  }
+  
 }

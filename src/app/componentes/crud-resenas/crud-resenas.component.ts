@@ -11,9 +11,9 @@ import { ResenaService } from 'src/app/servicios/resena/resena.service';
 export class CrudResenasComponent implements OnInit {
 
   titulo = 'Agregar reseña';
-  enviado = false;
-  formularioResena: FormGroup;
-  id: number | null = null;
+  submitted = false;
+  formResena: FormGroup;
+  idResena: number | null = null;
 
   constructor(
     public fb: FormBuilder,
@@ -21,7 +21,7 @@ export class CrudResenasComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.formularioResena = this.fb.group({
+    this.formResena = this.fb.group({
       mensaje: ['', Validators.required],
       valoracion: ['', Validators.required],
       idUsuario: ['', Validators.required],
@@ -30,26 +30,26 @@ export class CrudResenasComponent implements OnInit {
       // Aquí podrías agregar más campos según tus necesidades y aplicar las validaciones correspondientes
     });
   }
-  
+
   ngOnInit(): void {
-    // Aquí podrías incluir la lógica para editar una reseña si se proporciona un ID en la URL
+    // Aquí podrías incluir la lógica para editar una reseña si se proporciona un idResena en la URL
   }
 
-  guardar(): void {
-    this.enviado = true;
-    if (this.formularioResena.invalid) {
+  agregarOEditar(): void {
+    this.submitted = true;
+    if (this.formResena.invalid) {
       return;
     }
-    if (this.id === null) {
+    if (this.idResena === null) {
       this.agregar();
     } else {
-      this.editar(this.id);
+      this.editar(this.idResena);
     }
   }
 
   editar(idResena: number): void {
-    const resena = this.formularioResena.value;
-    this.resenaService.actualizarResena(idResena, resena).subscribe(response => {
+    const resena = this.formResena.value;
+    this.resenaService.updateReview(idResena, resena).subscribe(response => {
       this.router.navigate(['dashboard-resenas']);
     }, error => {
       console.error('Error al actualizar la reseña:', error);
@@ -57,8 +57,8 @@ export class CrudResenasComponent implements OnInit {
   }
   
   agregar(): void {
-    const resena = this.formularioResena.value;
-    this.resenaService.crearResenaComoAdmin(resena).subscribe(response => {
+    const resena = this.formResena.value;
+    this.resenaService.createReview(resena).subscribe(response => {
       this.router.navigate(['dashboard-resenas']);
     }, error => {
       console.error('Error al agregar la reseña:', error);

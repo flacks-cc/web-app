@@ -15,7 +15,7 @@
                     <div
                         *ngIf="formUsuario.get('nombre')?.invalid && (formUsuario.get('nombre')?.dirty || formUsuario.get('nombre')?.touched)">
                         <div *ngIf="formUsuario.get('nombre')?.hasError('required')">
-                            <p>El nombre de usuario es obligatorio.</p>
+                            <p>El nombre es obligatorio.</p>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                             <div
                                 *ngIf="formUsuario.get('apellidoPaterno')?.invalid && (formUsuario.get('apellidoPaterno')?.dirty || formUsuario.get('apellidoPaterno')?.touched)">
                                 <div *ngIf="formUsuario.get('apellidoPaterno')?.hasError('required')">
-                                    <p>El nombre de usuario es obligatorio.</p>
+                                    <p>El apellido es obligatorio.</p>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <div
                                 *ngIf="formUsuario.get('apellidoMaterno')?.invalid && (formUsuario.get('apellidoMaterno')?.dirty || formUsuario.get('apellidoMaterno')?.touched)">
                                 <div *ngIf="formUsuario.get('apellidoMaterno')?.hasError('required')">
-                                    <p>El nombre de usuario es obligatorio.</p>
+                                    <p>El apellido es obligatorio.</p>
                                 </div>
                             </div>
                         </div>

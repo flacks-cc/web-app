@@ -11,9 +11,9 @@ import { ReservacionService } from 'src/app/servicios/reservacion/reservacion.se
 export class CrudReservacionesComponent implements OnInit {
 
   titulo = 'Agregar reservación';
-  enviado = false;
-  formularioReservacion: FormGroup;
-  id: number | null = null;
+  submitted = false;
+  formReservacion: FormGroup;
+  idReservacion: number | null = null;
 
   constructor(
     public fb: FormBuilder,
@@ -21,7 +21,7 @@ export class CrudReservacionesComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.formularioReservacion = this.fb.group({
+    this.formReservacion = this.fb.group({
       fechaReserva: ['', Validators.required],
       horaInicio: ['', Validators.required],
       horaFin: ['', Validators.required],
@@ -31,23 +31,24 @@ export class CrudReservacionesComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    
   }
 
-  guardar(): void {
-    this.enviado = true;
-    if (this.formularioReservacion.invalid) {
+  agregarOEditar(): void {
+    this.submitted = true;
+    if (this.formReservacion.invalid) {
       return;
     }
-    if (this.id === null) {
+    if (this.idReservacion === null) {
       this.agregar();
     } else {
-      this.editar(this.id);
+      this.editar(this.idReservacion);
     }
   }
 
   editar(idReservacion: number): void {
-    const reservacion = { ...this.formularioReservacion.value, id: idReservacion };
-    this.reservacionService.actualizarReservacion(reservacion).subscribe(response => {
+    const reservacion = { ...this.formReservacion.value, idReservacion: idReservacion };
+    this.reservacionService.updateReservation(reservacion).subscribe(response => {
       this.router.navigate(['dashboard-reservaciones']);
     }, error => {
       console.error('Error al actualizar la reservación:', error);
@@ -55,8 +56,8 @@ export class CrudReservacionesComponent implements OnInit {
   }
   
   agregar(): void {
-    const reservacion = this.formularioReservacion.value;
-    this.reservacionService.crearReservacionComoAdmin(reservacion).subscribe(response => {
+    const reservacion = this.formReservacion.value;
+    this.reservacionService.createreservation(reservacion).subscribe(response => {
       this.router.navigate(['dashboard-reservaciones']);
     }, error => {
       console.error('Error al agregar la reservación:', error);

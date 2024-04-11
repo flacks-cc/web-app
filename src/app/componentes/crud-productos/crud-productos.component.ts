@@ -10,56 +10,69 @@ import { ProductoService } from 'src/app/servicios/producto/producto.service';
 })
 export class CrudProductosComponent implements OnInit {
   titulo = 'Agregar producto';
-  enviado = false;
-  formularioProducto: FormGroup;
-  id: number | null = null;
+  submitted = false;
+  formProducto: FormGroup;
+  idProducto: number | null = null;
 
-  constructor(
-    public fb: FormBuilder,
-    public productoService: ProductoService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.formularioProducto = this.fb.group({
+  constructor(public fb: FormBuilder,
+              public productoService: ProductoService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.formProducto = this.fb.group({
       nombre: ['', Validators.required],
-      descripcion: [''],
-      cantidadTotal: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      precio: ['', [Validators.required, Validators.pattern('[0-9]+(\.[0-9][0-9]?)?')]],
-      idCategoria: ['', Validators.required]
+      descripcion: ['', Validators.required],
+      precio: ['', Validators.required],
+      stock: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    // Lógica para verificar si se está editando un producto y cargar sus datos si es así
+    this.esEditar();
   }
 
-  guardar(): void {
-    this.enviado = true;
-    if (this.formularioProducto.invalid) {
-      return;
+  esEditar() {
+    if (this.idProducto !== null) {
+      this.titulo = 'Editar producto';
+      this.productoService.getProduct(this.idProducto).subscribe(response => {
+
+        this.formProducto.setValue({
+          nombre: response.nombre,
+          descripcion: response.descripcion,
+          precio: response.precio,
+          stock: response.stock
+        });
+      });
     }
-    if (this.id === null) {
-      this.agregar();
-    } else {
-      this.editar(this.id);
-    }
+  }
+
+  editar(idProducto: number): void {
+    const producto = this.formProducto.value;
+    this.productoService.updateProduct(idProducto, producto).subscribe(response => {
+      this.router.navigate(['dashboard-productos']);
+    }, error => {
+      console.error('Error al actualizar el producto:', error);
+    });
   }
 
   agregar(): void {
-    const producto = this.formularioProducto.value;
-    this.productoService.crearProducto(producto).subscribe(response => {
+    const producto = this.formProducto.value;
+    this.productoService.createProduct(producto).subscribe(response => {
       this.router.navigate(['dashboard-productos']);
     }, error => {
       console.error('Error al agregar el producto:', error);
     });
   }
 
-  editar(idProducto: number): void {
-    const producto = this.formularioProducto.value;
-    this.productoService.actualizarProducto(idProducto, producto).subscribe(response => {
-      this.router.navigate(['dashboard-productos']);
-    }, error => {
-      console.error('Error al actualizar el producto:', error);
-    });
+  agregarOEditar(): void {
+    this.submitted = true;
+    if (this.formProducto.invalid) {
+      return;
+    }
+    if (this.idProducto === null) {
+      this.agregar();
+    } else {
+      this.editar(this.idProducto);
+    }
   }
+  
 }

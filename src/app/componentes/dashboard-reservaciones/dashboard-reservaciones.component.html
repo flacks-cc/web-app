@@ -15,19 +15,19 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>ID Reservación</th>
+                                    <th hidden>Id</th>
                                     <th>Fecha</th>
-                                    <th>Hora Inicio</th>
-                                    <th>Hora Fin</th>
-                                    <th>Id Usuario</th>
-                                    <th>Id Servicio</th>
+                                    <th>Hora de inicio</th>
+                                    <th>Hora de fin</th>
+                                    <th>Usuario</th>
+                                    <th>Servicio</th>
                                     <!-- Acciones CRUD -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Filas de la tabla con las reservaciones -->
                                 <tr *ngFor="let r of reservaciones; let i = index">
-                                    <td>{{ r?.id }}</td>
+                                    <td hidden>{{ r?.id }}</td>
                                     <td>{{ r?.fechaReserva }}</td>
                                     <td>{{ r?.horaInicio }}</td>
                                     <td>{{ r?.horaFin }}</td>

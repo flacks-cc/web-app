@@ -37,6 +37,36 @@
     margin-right: 10px;
 }
 
+
+/*Contenedor de las opciones */
+
+.options-container {
+    width: 235px;
+    height: 400px;
+    overflow-y: auto;
+    border: 0px solid;
+    padding-right: 10px;
+    /* Add padding to the right of the container */
+}
+
+.options-container::-webkit-scrollbar {
+    width: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.options-container::-webkit-scrollbar-thumb {
+    background-color: goldenrod;
+    border-radius: 10px;
+}
+
+.hide-scrollbar.options-container::-webkit-scrollbar-thumb,
+.hide-scrollbar.options-container::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+
+
 .options div {
     display: flex;
     align-items: center;
@@ -83,6 +113,10 @@
     .aside,
     .aside.active {
         width: 60px;
+    }
+
+    .aside {
+        scroll-behavior: smooth;
     }
 
     .aside .option,

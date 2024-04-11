@@ -4,40 +4,61 @@
             <h5 class="modal-title">{{ titulo }}</h5>
         </div>
         <div class="modal-body">
-            <form [formGroup]="formularioServicio" (ngSubmit)="guardar()" autocomplete="off">
+            <form [formGroup]="formServicio" (ngSubmit)="agregarOEditar()" autocomplete="off">
                 <div class="form-group">
-                    <label for="nombre">* Nombre:</label>
+                    <label for="nombre">* Nombre del servicio:</label>
                     <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
-                    <div *ngIf="formularioServicio.get('nombre')?.invalid && (formularioServicio.get('nombre')?.dirty || formularioServicio.get('nombre')?.touched)">
-                        <div *ngIf="formularioServicio.get('nombre')?.hasError('required')"><p>El nombre es obligatorio.</p></div>
+                    <div
+                        *ngIf="formServicio.get('nombre')?.invalid && (formServicio.get('nombre')?.dirty || formServicio.get('nombre')?.touched)">
+                        <div *ngIf="formServicio.get('nombre')?.hasError('required')">
+                            <p>El nombre es obligatorio.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">* Descripción:</label>
-                    <textarea class="form-control" id="descripcion" formControlName="descripcion" required></textarea>
-                    <div *ngIf="formularioServicio.get('descripcion')?.invalid && (formularioServicio.get('descripcion')?.dirty || formularioServicio.get('descripcion')?.touched)">
-                        <div *ngIf="formularioServicio.get('descripcion')?.hasError('required')"><p>La descripción es obligatoria.</p></div>
+                    <textarea class="form-control no-resize" id="descripcion" formControlName="descripcion"
+                        required></textarea>
+                    <div
+                        *ngIf="formServicio.get('descripcion')?.invalid && (formServicio.get('descripcion')?.dirty || formServicio.get('descripcion')?.touched)">
+                        <div *ngIf="formServicio.get('descripcion')?.hasError('required')">
+                            <p>La descripción es obligatoria.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="precio">* Precio:</label>
-                    <input type="number" class="form-control" id="precio" formControlName="precio" required>
-                    <div *ngIf="formularioServicio.get('precio')?.invalid && (formularioServicio.get('precio')?.dirty || formularioServicio.get('precio')?.touched)">
-                        <div *ngIf="formularioServicio.get('precio')?.hasError('required')"><p>El precio es obligatorio.</p></div>
+                <!-- form-row y form-col es para que se muestren los campos en una misma linea -->
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="duracion">* Duración (minutos):</label>
+                            <input type="number" class="form-control" id="duracion" formControlName="duracion" required>
+                            <div
+                                *ngIf="formServicio.get('precio')?.invalid && (formServicio.get('precio')?.dirty || formServicio.get('precio')?.touched)">
+                                <div *ngIf="formServicio.get('precio')?.hasError('required')">
+                                    <p>El precio es obligatorio.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="duracion">* Duración (minutos):</label>
-                    <input type="text" class="form-control" id="duracion" formControlName="duracion" required>
-                    <div *ngIf="formularioServicio.get('duracion')?.invalid && (formularioServicio.get('duracion')?.dirty || formularioServicio.get('duracion')?.touched)">
-                        <div *ngIf="formularioServicio.get('duracion')?.hasError('required')"><p>La duración es obligatoria.</p></div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="precio">* Precio:</label>
+                            <input type="number" class="form-control" id="precio" min="0" formControlName="precio"
+                                required>
+                            <div
+                                *ngIf="formServicio.get('duracion')?.invalid && (formServicio.get('duracion')?.dirty || formServicio.get('duracion')?.touched)">
+                                <div *ngIf="formServicio.get('duracion')?.hasError('required')">
+                                    <p>La duración es obligatoria.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancelar" routerLink="/dashboard-servicios">Cancelar</button>
                     <button type="submit" class="btn-primary">Guardar</button>
                 </div>
-                <div *ngIf="formularioServicio.invalid && enviado">
+                <div *ngIf="formServicio.invalid && enviado">
                     <p>Por favor, ingrese correctamente todos los campos antes de guardar.</p>
                 </div>
             </form>
