@@ -1,6 +1,11 @@
 {
-  "name": "proyecto-integrador",
+  "name": "flacks-cc-web-app",
   "version": "0.0.0",
+  "description": "Web admin panel for managing appointments, products, staff, and business operations (Angular, Bootstrap, TypeScript)",
+  "author": {
+    "name": "flacks-cc",
+    "email": "chrisssp.dev@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
